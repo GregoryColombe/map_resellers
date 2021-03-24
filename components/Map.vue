@@ -1,5 +1,8 @@
 <template>
-    <div id="map"></div>
+    <div>
+        <div id="map"></div>
+        <Resellers />
+    </div>
 </template>
 
 <script>
@@ -42,8 +45,10 @@ export default {
 
         loadPoly: function (map, polyDepartment) {
             map.on('load', function () {
+                // Add polygones
                 map.addLayer(polyDepartment)
 
+                // Add Number of departments
                 map.addLayer({
                     "id": "text-departement",
                     "type": "symbol",
@@ -61,6 +66,7 @@ export default {
                     }
                 });
 
+                // Add Lines of Polygones
                 map.addLayer({
                     "id": "line-departement",
                     "type": "line",
@@ -237,7 +243,6 @@ export default {
             map.dragRotate._state = "disabled"
             map.doubleClickZoom._enabled = false
             map.transform._minZoom = 3.75
-            // this.$emit("onChangeMap", this.map)
 
             //Delete Mapbox tags
             document.getElementsByClassName("mapboxgl-ctrl-bottom-left")[0].remove()
@@ -247,7 +252,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #map {
     position: absolute;
     top: 0;
