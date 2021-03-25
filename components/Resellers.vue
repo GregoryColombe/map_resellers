@@ -8,6 +8,11 @@
 
 export default {
     name: 'Resellers',
+    props: {
+        findingResellers: Boolean,
+        polyDepartment: Object,
+        polySelected: Object
+    },
     data() {
         return {
             resellersData: ''
@@ -25,7 +30,32 @@ export default {
 
         init: function() {
             this.getData()
+        },
+
+        findResellers: function() {
+            console.log("liste de tout les polygones : ", this.polyDepartment);
+            console.log("Polygone selectionné : ", this.polySelected);
+
+            // let revendeurs= []
+            // let i = 0
+            // revendeurs.push(this.resellersData)
+
+            // revendeurs.forEach((resellers) => {
+            //     i++
+            //     console.log("resellers", resellers[i]);
+                
+            //     if (resellers[i].visible_carte === 1) {
+            //         console.log("okk !!!");
+            //     }
+            // })
         }
+    },
+    watch: {
+        findingResellers: function () {
+            if (this.findingResellers === true) {
+                this.findResellers()
+            }
+        },
     }
 }
 </script>

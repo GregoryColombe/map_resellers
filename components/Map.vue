@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="map"></div>
-        <Resellers />
+        <Resellers :findingResellers="findingResellers" :polyDepartment="polyDepartment" :polySelected="polySelected" />
     </div>
 </template>
 
@@ -14,8 +14,12 @@ export default {
     name: 'Map',
     data() {
         return {
-            map:'',
+            map:{},
+            polyDepartment: {},
             customData: '',
+            clickCoordinates: [],
+            findingResellers: false,
+            polySelected: {}
         }
     },
     mounted() {
@@ -23,12 +27,13 @@ export default {
         this.addCustomData()
         this.configMap(this.map)
         this.getPolyDepartment()
+        this.detectIfClickIsInside(this.map)
     },
     
     methods: {
         async getPolyDepartment() {
-            const polyDepartment = await this.$axios.$get('/polyDepartment.json')
-            this.loadPoly(this.map, polyDepartment)
+            this.polyDepartment = await this.$axios.$get('/polyDepartment.json')
+            this.loadPoly(this.map, this.polyDepartment)
         },
         
         initMap: function () {
@@ -247,6 +252,37 @@ export default {
             //Delete Mapbox tags
             document.getElementsByClassName("mapboxgl-ctrl-bottom-left")[0].remove()
             document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].remove()
+        },
+        
+        detectIfClickIsInside: function (map) {
+            map.on("click",  (e) => {
+                this.findingResellers = false
+
+                this.clickCoordinates = [e.lngLat.lng, e.lngLat.lat]
+                this.polyDepartment.source.data.features.forEach((poly) => {
+                    const polyDepartment_isInside = this.$turf.inside(this.clickCoordinates, poly)
+
+                    if (polyDepartment_isInside === true) {
+                        // console.log("yes ! : poly code : ", poly.properties.code);
+                        const promise = new Promise((resolve, reject) => {
+                            resolve(
+                                this.map.flyTo({
+                                    center: this.clickCoordinates,
+                                    zoom: 6.2,
+                                })
+                            )
+                        })
+                        promise.then( () => {
+                            setTimeout(() => {
+                                // this.findResellers(poly)
+                                this.polySelected = poly
+                                this.findingResellers = true
+                                // this.trouveRevendeurs(polyDepartmentElem, poly)
+                            }, 100)
+                        })
+                    }
+                })
+            })
         }
     },
 }
