@@ -2,10 +2,12 @@
     <div>
         <div id="map"></div>
         <Resellers :findingResellers="findingResellers" :polyDepartment="polyDepartment" :polySelected="polySelected" />
+        <MapMarker :map="map" :clickCoordinates="clickCoordinates" color="#1b65c5" />
     </div>
 </template>
 
 <script>
+import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 // import axios from 'axios'

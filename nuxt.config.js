@@ -1,4 +1,5 @@
 export default {
+  target: 'static',
   head: {
     title: 'Abvent | Carte Revendeurs',
     htmlAttrs: {
@@ -23,5 +24,20 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {},
-  build: {}
+  build: {
+    // publicPath: '/',
+    extractCSS: true,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true
+          }
+        }
+      }
+    }
+  }
 }

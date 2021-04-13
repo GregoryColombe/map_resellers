@@ -25,7 +25,6 @@ export default {
     methods: {
         async getData() {
             this.resellersData = await this.$axios.$get('/resellersData.json')
-            // console.log("this.resellersData : ", this.resellersData);
         },
 
         init: function() {
@@ -35,19 +34,6 @@ export default {
         findResellers: function() {
             console.log("liste de tout les polygones : ", this.polyDepartment);
             console.log("Polygone selectionné : ", this.polySelected);
-
-            // let revendeurs= []
-            // let i = 0
-            // revendeurs.push(this.resellersData)
-
-            // revendeurs.forEach((resellers) => {
-            //     i++
-            //     console.log("resellers", resellers[i]);
-                
-            //     if (resellers[i].visible_carte === 1) {
-            //         console.log("okk !!!");
-            //     }
-            // })
         }
     },
     watch: {
