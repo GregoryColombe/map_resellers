@@ -37,7 +37,7 @@ export default {
             marker.addTo(this.map)
         },
 
-        deleteAllMarker: function() {
+        deleteAllMarkers: function() {
             document.querySelectorAll(".mapboxgl-marker").forEach((e) => e.remove())
         }
     },
@@ -47,7 +47,7 @@ export default {
 
     watch: {
         clickCoordinates: function () {
-            this.deleteAllMarker()
+            this.deleteAllMarkers()
             this.addMarkers()
         }
     }
