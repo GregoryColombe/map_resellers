@@ -1,4 +1,4 @@
-<template>
+cd <template>
     <div></div>
 </template>
 
