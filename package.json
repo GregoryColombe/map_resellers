@@ -10,15 +10,14 @@
   },
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
-    "@nuxtjs/axios": "^5.13.1",
     "@turf/turf": "^6.3.0",
     "core-js": "^3.9.1",
     "gsap": "^3.6.1",
     "mapbox-gl": "^1.0.0",
-    "nuxt": "^2.15.3",
-    "topojson-simplify": "^3.0.2"
+    "nuxt": "^2.15.3"
   },
   "devDependencies": {
+    "@nuxtjs/axios": "^5.13.1",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "node-sass": "^5.0.0",
