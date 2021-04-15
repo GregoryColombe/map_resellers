@@ -19,7 +19,8 @@ export default {
         }
     },
     mounted() {
-        this.init()
+      this.init()
+      console.log(process.env.BASE_URL)
     },
 
     methods: {
