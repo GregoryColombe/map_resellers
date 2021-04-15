@@ -23,7 +23,9 @@ export default {
   modules: [
     '@nuxtjs/axios',
   ],
-  axios: {},
+  axios: {
+    baseURL: 'https://map-resellers.netlify.app'
+  },
   build: {
     // publicPath: '/',
     // extractCSS: true,
