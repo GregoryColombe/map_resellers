@@ -1,8 +1,14 @@
 <template>
-  <div class="container">
-    <Map />
-  </div>
+    <div
+        class="container"
+        id="toto"
+    >
+        <Map />
+    </div>
 </template>
+
+<script>
+</script>
 
 <style lang="scss" scoped>
 </style>
