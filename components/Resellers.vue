@@ -1,21 +1,30 @@
 <template>
-    <div>
-
-    </div>
+  <div />
 </template>
 
 <script>
 
 export default {
-    name: 'Resellers',
+    name: "Resellers",
     props: {
         findingResellers: Boolean,
-        polyDepartment: Object,
-        polySelected: Object
+        polyDepartment: {
+            type: Object,
+            default: () => ({})
+        },
+        polySelected: {
+            type: Object,
+            default: () => ({})
+        }
     },
-    data() {
-        return {
-            resellersData: ''
+    data: () => ({
+        resellersData: ""
+    }),
+    watch: {
+        findingResellers() {
+            if (this.findingResellers === true) {
+                this.findResellers()
+            }
         }
     },
     mounted() {
@@ -24,43 +33,36 @@ export default {
 
     methods: {
         async getData() {
-            this.resellersData = await this.$axios.$get('/resellersData.json')
+            this.resellersData = await this.$axios.$get("/resellersData.json")
         },
 
-        init: function() {
+        init() {
             this.getData()
         },
 
-        findResellers: function() {
-            let result = [];
+        findResellers() {
+            const result = []
 
-            for(var i in this.resellersData) {
-                result.push([i, this.resellersData[i]]);
+            for (const i in this.resellersData) {
+                result.push([i, this.resellersData[i]])
             }
-            result.forEach(element => {
+            result.forEach((element) => {
                 // console.log("element0 : ", element[0]);
                 // console.log("this.polySelected.properties.code : ", this.polySelected.properties.code);
                 this.isInZoneAction(element)
-            });
+            })
         },
 
-        isInZoneAction: function (element) {
+        isInZoneAction(element) {
             const revendeurZoneAction = element[1].zone_action.split(";")
 
-            revendeurZoneAction.forEach(revendeurZoneActionItem => {
-                if (revendeurZoneActionItem == this.polySelected.properties.code) {
+            revendeurZoneAction.forEach((revendeurZoneActionItem) => {
+                if (revendeurZoneActionItem === this.polySelected.properties.code) {
                     // console.log("OKKKKKKK");
                     // console.log("element[1].id_user : ", element[1].id_user);
                 }
             })
         }
-    },
-    watch: {
-        findingResellers: function () {
-            if (this.findingResellers === true) {
-                this.findResellers()
-            }
-        },
     }
 }
 </script>

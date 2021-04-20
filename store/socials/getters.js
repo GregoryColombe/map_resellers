@@ -1,5 +1,4 @@
 export default {
-  getData: state => state.data,
-  getModal: state => state.modal
+    getData: state => state.data,
+    getModal: state => state.modal
 }
-
