@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <Map/>
+    <Map />
   </div>
 </template>
-
 
 <style lang="scss" scoped>
 </style>

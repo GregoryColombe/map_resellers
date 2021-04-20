@@ -18,15 +18,17 @@ export default {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
   css: [
-    "~/assets/style/style.scss"
+    '~/assets/style/style.scss'
   ],
   plugins: [
-    "~/plugins/extensions.client.js"
+    '~/plugins/extensions.client.js'
   ],
   components: true,
-  buildModules: [],
+  buildModules: [
+    '@nuxtjs/eslint-module'
+  ],
   modules: [
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
   axios: {
     baseURL: process.env.BASE_URL
