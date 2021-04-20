@@ -1,9 +1,5 @@
 <template>
-    <div
-        class="container"
-        id="toto"
-    >
-        <div />
+    <div class="container">
         <Map />
     </div>
 </template>
