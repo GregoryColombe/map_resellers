@@ -32,8 +32,27 @@ export default {
         },
 
         findResellers: function() {
-            console.log("liste de tout les polygones : ", this.polyDepartment);
-            console.log("Polygone selectionné : ", this.polySelected);
+            let result = [];
+
+            for(var i in this.resellersData) {
+                result.push([i, this.resellersData[i]]);
+            }
+            result.forEach(element => {
+                // console.log("element0 : ", element[0]);
+                // console.log("this.polySelected.properties.code : ", this.polySelected.properties.code);
+                this.isInZoneAction(element)
+            });
+        },
+
+        isInZoneAction: function (element) {
+            const revendeurZoneAction = element[1].zone_action.split(";")
+
+            revendeurZoneAction.forEach(revendeurZoneActionItem => {
+                if (revendeurZoneActionItem == this.polySelected.properties.code) {
+                    // console.log("OKKKKKKK");
+                    // console.log("element[1].id_user : ", element[1].id_user);
+                }
+            }) 
         }
     },
     watch: {
