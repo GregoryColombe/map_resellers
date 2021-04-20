@@ -4,20 +4,26 @@
             <h1>2 revendeurs trouvés</h1>
         </div>
 
-        <div class="resellers_data">
-            <ul class="resellers_list">
-                <li 
-                    v-for="(reseller, i) in resellers" 
-                    :key="i" 
-                    class="resellers_list_item"
-                >
-                    <p>{{ reseller[1].societe_user }}</p>
-                    <p>{{ reseller[1].adresse1_user }}</p>
-                    <p>{{ reseller[1].cp_user }}</p>
-                    <p>{{ reseller[1].tel_user }}</p>
-                </li>
-            </ul>
-        </div>
+        <ul class="resellers_list">
+            <li 
+                v-for="(reseller, i) in resellers" 
+                :key="i" 
+                class="resellers_list_item"
+            >
+                <p class="resellers_list_item_name">
+                    {{ reseller[1].societe_user }}
+                </p>
+                <p class="resellers_list_item_adress">
+                    {{ reseller[1].adresse1_user }}
+                </p>
+                <p class="resellers_list_item_codeAndCity">
+                    {{ reseller[1].cp_user }}
+                </p>
+                <p class="resellers_list_item_telephone">
+                    {{ reseller[1].tel_user }}
+                </p>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -110,7 +116,8 @@ export default {
     width: 40vw;
     background: #fff;
 
-    &_data {
+    &_list {
+        padding: 0;
         color:#fff;
 
         &_item {
