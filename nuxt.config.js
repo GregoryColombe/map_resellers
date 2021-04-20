@@ -17,7 +17,9 @@ export default {
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
-  css: [],
+  css: [
+    "~/assets/style/style.scss"
+  ],
   plugins: [
     "~/plugins/extensions.client.js"
   ],
@@ -29,20 +31,5 @@ export default {
   axios: {
     baseURL: process.env.BASE_URL
   },
-  build: {
-    // publicPath: '/',
-    // extractCSS: true,
-    // optimization: {
-    //   splitChunks: {
-    //     cacheGroups: {
-    //       styles: {
-    //         name: 'styles',
-    //         test: /\.(css|vue)$/,
-    //         chunks: 'all',
-    //         enforce: true
-    //       }
-    //     }
-    //   }
-    // }
-  }
+  build: {}
 }
