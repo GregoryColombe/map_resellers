@@ -1,24 +1,49 @@
 <template>
-    <div class="resellers">
-        <div class="resellers_number">
-            <h1>2 revendeurs trouvés</h1>
-        </div>
-        <div class="resellers_data"></div>
+  <div class="resellers">
+    <div class="resellers_number">
+      <h1>2 revendeurs trouvés</h1>
     </div>
+    <div class="resellers_data" />
+    <ul class="resellers_list">
+      <li v-for="(reseller, i) in resellers" :key="i" class="resellers_list_item">
+        <p>{{ reseller[1].societe_user }}</p>
+        <p>{{ reseller[1].adresse1_user }}</p>
+        <p>{{ reseller[1].cp_user }}</p>
+        <p>{{ reseller[1].tel_user }}</p>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 
 export default {
-    name: 'Resellers',
+    name: "Resellers",
     props: {
         findingResellers: Boolean,
-        polyDepartment: Object,
-        polySelected: Object
+        polyDepartment: {
+            type: Object,
+            default: () => ({})
+        },
+        polySelected: {
+            type: Object,
+            default: () => ({})
+        }
     },
-    data() {
-        return {
-            resellersData: ''
+    data: () => ({
+        resellersData: "",
+        resellers: [],
+        items: [
+            { prenom: "gregory" },
+            { prenom: "pablo" }
+        ]
+    }),
+    watch: {
+        findingResellers() {
+            if (this.findingResellers === true) {
+                this.resellers = []
+                this.findResellers()
+            }
         }
     },
     mounted() {
@@ -27,81 +52,45 @@ export default {
 
     methods: {
         async getData() {
-            this.resellersData = await this.$axios.$get('/resellersData.json')
+            this.resellersData = await this.$axios.$get("/resellersData.json")
         },
 
-        init: function() {
+        init() {
             this.getData()
         },
 
-        findResellers: function() {
-            let result = [];
-            for(var i in this.resellersData) {
-                result.push([i, this.resellersData[i]]);
+        findResellers() {
+            const result = []
+            for (const i in this.resellersData) {
+                result.push([i, this.resellersData[i]])
             }
-            result.forEach(reseller => {
-                this.isInZoneAction(reseller)
-            });
+            result.forEach((reseller) => {
+                this.isProximite(reseller)
+                this.isAgree(reseller)
+            })
         },
 
-        isInZoneAction: function (reseller) {
+        isProximite(reseller) {
             const revendeurZoneAction = reseller[1].zone_action.split(";")
 
-            revendeurZoneAction.forEach(revendeurZoneActionItem => {
-                if (revendeurZoneActionItem == this.polySelected.properties.code) {
-                    console.log("toto : ", this.polySelected, reseller[1].cp_user);
-
-                    // this.addModal(reseller)
-
-                    // if () {
-
-                    // }
+            revendeurZoneAction.forEach((revendeurZoneActionItem) => {
+                if (revendeurZoneActionItem === this.polySelected.properties.code) {
+                    reseller.type = "proximité"
+                    this.resellers.push(reseller)
                 }
-            }) 
+            })
+        },
+
+        isAgree(reseller) {
             if (reseller[1].cp_user.length > 2) {
                 reseller[1].cp_user = reseller[1].cp_user.slice(0, 2)
-
-                if (reseller[1].cp_user == this.polySelected.properties.code) {
-                    console.log("OKK IS GOOD");
-                }
             }
-        },
-    
 
-        addModal: function (reseller) {
-            // Create div resellers_data_item
-            let modal = document.createElement("div")
-            let modal_text = document.createTextNode(" ")
-            modal.setAttribute("class", "resellers_data_item")
-            modal.appendChild(modal_text) 
-            document.querySelectorAll(".resellers_data")[0].appendChild(modal)
-
-            //  Create all elements
-            this.createTexElement("p", reseller[1].societe_user, "resellers_data_item_name", modal)
-            this.createTexElement("p", reseller[1].adresse1_user, "resellers_data_item_adress", modal)
-            this.createTexElement("p", reseller[1].cp_user + " " + reseller[1].ville_user, "resellers_data_item_codeAndCity", modal)
-            this.createTexElement("p", "Tel : " + reseller[1].tel_user, "resellers_data_item_telephone", modal)
-        },
-
-        createTexElement: function(target, text, idName, modal){
-            let element = document.createElement(target)
-            let element_text = document.createTextNode(text)
-            element.setAttribute("class", idName)
-            element.appendChild(element_text)
-            modal.appendChild(element)
-        },
-
-        deleteAllElement: function() {
-            document.querySelectorAll(".resellers_data_item").forEach((e) => e.remove())
+            if (reseller[1].cp_user === this.polySelected.properties.code) {
+                reseller.type = "agree"
+                this.resellers.push(reseller)
+            }
         }
-    },
-    watch: {
-        findingResellers: function () {
-            if (this.findingResellers === true) {
-                this.deleteAllElement()
-                this.findResellers()
-            }
-        },
     }
 }
 </script>
@@ -133,6 +122,4 @@ export default {
         }
     }
 }
-
-
 </style>

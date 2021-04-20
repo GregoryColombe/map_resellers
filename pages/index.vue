@@ -1,11 +1,8 @@
 <template>
   <div class="container">
-      <Map />
+    <Map />
   </div>
 </template>
 
-
-<style lang="scss">
-@import url("../assets/style/style.scss");
-
+<style lang="scss" scoped>
 </style>
