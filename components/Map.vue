@@ -1,9 +1,17 @@
 <template>
-  <div>
-    <div id="map" />
-    <Resellers :finding-resellers="findingResellers" :poly-department="polyDepartment" :poly-selected="polySelected" />
-    <MapMarker :map="map" :click-coordinates="clickCoordinates" color="#1b65c5" />
-  </div>
+    <div>
+        <div id="map" />
+        <Resellers
+            :finding-resellers="findingResellers"
+            :poly-department="polyDepartment"
+            :poly-selected="polySelected"
+        />
+        <MapMarker
+            :map="map"
+            :click-coordinates="clickCoordinates"
+            color="#1b65c5"
+        />
+    </div>
 </template>
 
 <script>
@@ -262,7 +270,7 @@ export default {
                     const polyDepartmentIsInside = this.$turf.inside(this.clickCoordinates, poly)
 
                     if (polyDepartmentIsInside === true) {
-                        const promise = new Promise((resolve, reject) => {
+                        const promise = new Promise((resolve) => {
                             resolve(
                                 this.map.flyTo({
                                     center: this.clickCoordinates,

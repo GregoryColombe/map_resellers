@@ -1,18 +1,24 @@
 <template>
-  <div class="resellers">
-    <div class="resellers_number">
-      <h1>2 revendeurs trouvés</h1>
+    <div class="resellers">
+        <div class="resellers_number">
+            <h1>2 revendeurs trouvés</h1>
+        </div>
+
+        <div class="resellers_data">
+            <ul class="resellers_list">
+                <li 
+                    v-for="(reseller, i) in resellers" 
+                    :key="i" 
+                    class="resellers_list_item"
+                >
+                    <p>{{ reseller[1].societe_user }}</p>
+                    <p>{{ reseller[1].adresse1_user }}</p>
+                    <p>{{ reseller[1].cp_user }}</p>
+                    <p>{{ reseller[1].tel_user }}</p>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="resellers_data" />
-    <ul class="resellers_list">
-      <li v-for="(reseller, i) in resellers" :key="i" class="resellers_list_item">
-        <p>{{ reseller[1].societe_user }}</p>
-        <p>{{ reseller[1].adresse1_user }}</p>
-        <p>{{ reseller[1].cp_user }}</p>
-        <p>{{ reseller[1].tel_user }}</p>
-      </li>
-    </ul>
-  </div>
 </template>
 
 <script>
