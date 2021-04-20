@@ -262,7 +262,6 @@ export default {
                     const polyDepartmentIsInside = this.$turf.inside(this.clickCoordinates, poly)
 
                     if (polyDepartmentIsInside === true) {
-                        // console.log("yes ! : poly code : ", poly.properties.code);
                         const promise = new Promise((resolve, reject) => {
                             resolve(
                                 this.map.flyTo({
@@ -273,10 +272,8 @@ export default {
                         })
                         promise.then(() => {
                             setTimeout(() => {
-                                // this.findResellers(poly)
                                 this.polySelected = poly
                                 this.findingResellers = true
-                                // this.trouveRevendeurs(polyDepartmentElem, poly)
                             }, 100)
                         })
                     }
