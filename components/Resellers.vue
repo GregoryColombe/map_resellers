@@ -46,20 +46,19 @@ export default {
             for (const i in this.resellersData) {
                 result.push([i, this.resellersData[i]])
             }
-            result.forEach((element) => {
-                // console.log("element0 : ", element[0]);
-                // console.log("this.polySelected.properties.code : ", this.polySelected.properties.code);
-                this.isInZoneAction(element)
+            result.forEach((reseller) => {
+                this.isInZoneAction(reseller)
             })
         },
 
-        isInZoneAction(element) {
-            const revendeurZoneAction = element[1].zone_action.split(";")
+        isInZoneAction(reseller) {
+            const revendeurZoneAction = reseller[1].zone_action.split(";")
 
             revendeurZoneAction.forEach((revendeurZoneActionItem) => {
                 if (revendeurZoneActionItem === this.polySelected.properties.code) {
-                    // console.log("OKKKKKKK");
-                    // console.log("element[1].id_user : ", element[1].id_user);
+                    console.log("Find a reseller :")
+                    console.log("Id_user : ", reseller[1].id_user)
+                    console.log("Société user : ", reseller[1].societe_user)
                 }
             })
         }

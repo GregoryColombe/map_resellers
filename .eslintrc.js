@@ -17,7 +17,7 @@ module.exports = {
     rules: {
         indent: ["warn", 4],
         quotes: ["warn", "double"],
-        "object-shorthand": ["warn", "always"],
+        "no-console": "off",
         "space-before-function-paren": ["warn", "never"]
     }
 }
