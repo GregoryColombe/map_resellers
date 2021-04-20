@@ -52,7 +52,7 @@ export default {
                     // console.log("OKKKKKKK");
                     // console.log("element[1].id_user : ", element[1].id_user);
                 }
-            }) 
+            })
         }
     },
     watch: {
@@ -65,6 +65,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

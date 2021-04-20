@@ -31,13 +31,13 @@ export default {
         this.getPolyDepartment()
         this.detectIfClickIsInside(this.map)
     },
-    
+
     methods: {
         async getPolyDepartment() {
             this.polyDepartment = await this.$axios.$get('/polyDepartment.json')
             this.loadPoly(this.map, this.polyDepartment)
         },
-        
+
         initMap: function () {
             mapboxgl.accessToken =
                 'pk.eyJ1IjoiZ3JlZ29yeWNvbG9tYmUiLCJhIjoiY2sxdWY0bXJyMDV2bDNjcW1rdnI5azM4byJ9.6csVhKC7yWAmHFl6OmFBCw';
@@ -220,12 +220,12 @@ export default {
                     "type": "FeatureCollection"
             };
         },
-    
+
         forwardGeocoder: function (query) {
             var matchingFeatures = [];
             for (var i = 0; i < this.customData.features.length; i++) {
                 var feature = this.customData.features[i];
-            
+
                 if (feature.properties.title.toLowerCase().search(query.toLowerCase()) !== -1) {
                     feature['place_name'] = '🌲 ' + feature.properties.title;
                     feature['center'] = feature.geometry.coordinates;
@@ -255,7 +255,7 @@ export default {
             document.getElementsByClassName("mapboxgl-ctrl-bottom-left")[0].remove()
             document.getElementsByClassName("mapboxgl-ctrl-bottom-right")[0].remove()
         },
-        
+
         detectIfClickIsInside: function (map) {
             map.on("click",  (e) => {
                 this.findingResellers = false
@@ -290,7 +290,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #map {
     position: absolute;
     top: 0;
