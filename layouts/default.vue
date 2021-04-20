@@ -7,8 +7,7 @@
 export default {
   mounted() {
     const params = this.$route.query
-    // console.log(this.$route.query);
-    console.log("lang : ", params.lang, " & zoom :", params.zoom);
+    // console.log("lang : ", params.lang, " & zoom :", params.zoom);
   }
 }
 </script>
