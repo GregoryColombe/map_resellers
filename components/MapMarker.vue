@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         init: function() {
-            console.log("coordonnées : ", this.map, this.clickCoordinates);
+            // console.log("coordonnées : ", this.map, this.clickCoordinates);
         },
 
         addMarkers: function() {
