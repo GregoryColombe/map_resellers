@@ -14,8 +14,11 @@ export default {
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
         ]
     },
-    env: {
-        baseUrl: process.env.BASE_URL || "http://localhost:3000"
+    publicRuntimeConfig: {
+        baseURL: process.env.BASE_URL || "http://localhost:3000"
+    },
+    privateRuntimeConfig: {
+
     },
     css: [
         "~/assets/style/style.scss"
@@ -28,7 +31,8 @@ export default {
         "@nuxtjs/eslint-module"
     ],
     modules: [
-        "@nuxtjs/axios"
+        "@nuxtjs/axios",
+        "@nuxtjs/dotenv"
     ],
     axios: {
         baseURL: process.env.BASE_URL
