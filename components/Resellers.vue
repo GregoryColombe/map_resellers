@@ -1,7 +1,9 @@
 <template>
     <div class="resellers">
         <div class="resellers_number">
-            <h1>2 revendeurs trouvés</h1>
+            <h1 v-if="resellersNumber">
+                {{ resellersNumber }} <span>{{ resellersNumberDescription }}</span>
+            </h1>
         </div>
 
         <ul class="resellers_list">
@@ -47,13 +49,27 @@ export default {
     },
     data: () => ({
         resellersData: "",
-        resellers: []
+        resellers: [],
+        resellersProximity: [],
+        resellersApproved: [],
+        resellersNumber: 0,
+        resellersNumberDescription: ""
     }),
     watch: {
         findingResellers() {
             if (this.findingResellers === true) {
                 this.resellers = []
+                this.resellersApproved = []
+                this.resellersProximity = []
                 this.findResellers()
+            }
+        },
+        resellersNumber() {
+            if (this.resellersNumber === 1) {
+                this.resellersNumberDescription = "revendeur trouvé"
+            }
+            else if (this.resellersNumber > 1){
+                this.resellersNumberDescription = "revendeurs trouvés"
             }
         }
     },
@@ -87,7 +103,10 @@ export default {
             revendeurZoneAction.forEach((revendeurZoneActionItem) => {
                 if (revendeurZoneActionItem === this.polySelected.properties.code) {
                     reseller[1].type = "proximité"
+                    reseller[1].proximity = this.resellers.length
                     this.resellers.push(reseller)
+                    this.resellersProximity.push(reseller[1].type)
+                    this.changeResselersNumber()
                 }
             })
         },
@@ -97,10 +116,17 @@ export default {
 
             if (cpFormated === this.polySelected.properties.code) {
                 reseller[1].type = "agrée"
+                reseller[1].agree = this.resellers.length
                 this.resellers.push(reseller)
+                this.resellersApproved.push(reseller[1].type)
+                this.changeResselersNumber()
             }
+        },
+
+        changeResselersNumber() {
+            this.resellersNumber = this.resellersApproved.length + this.resellersProximity.length
         }
-    }
+    },
 }
 </script>
 
