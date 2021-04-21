@@ -1,11 +1,16 @@
 <template>
-  <div class="container">
-      <Map />
-  </div>
+    <div class="container">
+        <Map />
+    </div>
 </template>
 
+<script>
+export default {
+    mounted() {
+        console.log(this.$config.baseURL)
+    }
+}
+</script>
 
-<style lang="scss">
-@import url("../assets/style/style.scss");
-
+<style lang="scss" scoped>
 </style>

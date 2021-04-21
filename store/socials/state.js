@@ -1,4 +1,4 @@
 export default () => ({
-  data: {},
-  modal: false
+    data: {},
+    modal: false
 })

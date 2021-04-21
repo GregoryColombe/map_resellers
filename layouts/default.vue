@@ -1,17 +1,8 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+    <div>
+        <Nuxt />
+    </div>
 </template>
-<script>
-export default {
-  mounted() {
-    const params = this.$route.query
-    // console.log("lang : ", params.lang, " & zoom :", params.zoom);
-  }
-}
-</script>
-
 
 <style>
 html {

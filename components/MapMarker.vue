@@ -1,59 +1,62 @@
 <template>
-    <div></div>
+    <div />
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl';
-import {mapGetters} from 'vuex';
+import mapboxgl from "mapbox-gl"
+import { mapGetters } from "vuex"
 
 export default {
-    name: 'MapMarker',
+    name: "MapMarker",
     props: {
-        map: Object,
-        clickCoordinates: Array,
-        color: String,
-    },
-    data() {
-        return {
-
+        map: {
+            type: Object,
+            default: () => ({})
+        },
+        clickCoordinates: {
+            type: Array,
+            default: () => ([])
+        },
+        color: {
+            type: String,
+            default: "#1b65c5"
         }
     },
+    data: () => ({}),
     computed: {
         ...mapGetters({
-            modal: 'socials/getData'
+            modal: "socials/getData"
         })
     },
+    watch: {
+        clickCoordinates() {
+            this.deleteAllMarkers()
+            this.addMarkers()
+        }
+    },
+    mounted() {
+        this.init()
+    },
     methods: {
-        init: function() {
+        init() {
             // console.log("coordonnées : ", this.map, this.clickCoordinates);
         },
 
-        addMarkers: function() {
+        addMarkers() {
             this.addClickMarker("#F3DB2F", this.clickCoordinates)
         },
-        addClickMarker: function(colorMarker, position) {
+        addClickMarker(colorMarker, position) {
             const marker = new mapboxgl.Marker({ color: colorMarker })
             marker.setLngLat(position)
             marker.addTo(this.map)
         },
 
-        deleteAllMarkers: function() {
-            document.querySelectorAll(".mapboxgl-marker").forEach((e) => e.remove())
-        }
-    },
-    mounted(){
-        this.init()
-    },
-
-    watch: {
-        clickCoordinates: function () {
-            this.deleteAllMarkers()
-            this.addMarkers()
+        deleteAllMarkers() {
+            document.querySelectorAll(".mapboxgl-marker").forEach(e => e.remove())
         }
     }
 }
 </script>
 
 <style>
-
 </style>
