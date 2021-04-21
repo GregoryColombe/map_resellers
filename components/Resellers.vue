@@ -13,6 +13,9 @@
                 <p class="resellers_list_item_name">
                     {{ reseller[1].societe_user }}
                 </p>
+                <p class="resellers_list_item_type">
+                    Revendeur <span v-if="reseller[1].type === 'proximité'">de</span> {{ reseller[1].type }}
+                </p>
                 <p class="resellers_list_item_adress">
                     {{ reseller[1].adresse1_user }}
                 </p>
@@ -44,11 +47,7 @@ export default {
     },
     data: () => ({
         resellersData: "",
-        resellers: [],
-        items: [
-            { prenom: "gregory" },
-            { prenom: "pablo" }
-        ]
+        resellers: []
     }),
     watch: {
         findingResellers() {
@@ -87,19 +86,17 @@ export default {
 
             revendeurZoneAction.forEach((revendeurZoneActionItem) => {
                 if (revendeurZoneActionItem === this.polySelected.properties.code) {
-                    reseller.type = "proximité"
+                    reseller[1].type = "proximité"
                     this.resellers.push(reseller)
                 }
             })
         },
 
         isAgree(reseller) {
-            if (reseller[1].cp_user.length > 2) {
-                reseller[1].cp_user = reseller[1].cp_user.slice(0, 2)
-            }
+            const cpFormated = reseller[1].cp_user.slice(0, 2)
 
-            if (reseller[1].cp_user === this.polySelected.properties.code) {
-                reseller.type = "agree"
+            if (cpFormated === this.polySelected.properties.code) {
+                reseller[1].type = "agrée"
                 this.resellers.push(reseller)
             }
         }
@@ -129,7 +126,7 @@ export default {
                 font-weight: bold;
             }
 
-            &_name, &_adress, &_codeAndCity, &_telephone {
+            &_name, &_type, &_adress, &_codeAndCity, &_telephone {
                 margin-bottom: 0.25rem;
             }
         }
