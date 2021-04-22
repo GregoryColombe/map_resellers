@@ -27,7 +27,8 @@ export default {
         customData: "",
         clickCoordinates: [],
         findingResellers: false,
-        polySelected: {}
+        polySelected: {},
+        resellers: []
     }),
     mounted() {
         this.initMap()
@@ -35,14 +36,16 @@ export default {
         this.configMap(this.map)
         this.getPolyDepartment()
         this.detectIfClickIsInside(this.map)
-
-        console.log(this.$config)
     },
 
     methods: {
         async getPolyDepartment() {
             this.polyDepartment = await this.$axios.$get("/polyDepartment.json")
             this.loadPoly(this.map, this.polyDepartment)
+        },
+
+        getResellers(resellers) {
+            this.resellers = resellers
         },
 
         initMap() {
@@ -243,12 +246,12 @@ export default {
 
         // Map Configuration
         configMap(map) {
-            map.addControl(new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
+            map.addControl(new this.$MapboxGeocoder({
+                accessToken: this.$mapboxgl.accessToken,
                 localGeocoder: this.forwardGeocoder,
                 zoom: 7.2,
                 placeholder: "Rechercher un lieu",
-                mapboxgl
+                mapboxgl: this.$mapboxgl
             }))
 
             map.dragPan._state = "enabled"

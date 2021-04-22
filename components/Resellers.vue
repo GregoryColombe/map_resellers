@@ -1,9 +1,15 @@
 <template>
-    <div class="resellers">
-        <div class="resellers_number">
-            <h1 v-if="resellersNumber">
+    <div 
+        v-if="findingResellers" 
+        class="resellers"
+    >
+        <div class="resellers_header">
+            <p 
+                v-if="resellersNumber" 
+                class="resellers_header_number"
+            >
                 {{ resellersNumber }} <span>{{ resellersNumberDescription }}</span>
-            </h1>
+            </p>
         </div>
 
         <ul class="resellers_list">
@@ -19,10 +25,7 @@
                     Revendeur <span v-if="reseller[1].type === 'proximité'">de</span> {{ reseller[1].type }}
                 </p>
                 <p class="resellers_list_item_adress">
-                    {{ reseller[1].adresse1_user }}
-                </p>
-                <p class="resellers_list_item_codeAndCity">
-                    {{ reseller[1].cp_user }}
+                    {{ reseller[1].adresse1_user }} {{ reseller[1].cp_user }}
                 </p>
                 <p class="resellers_list_item_telephone">
                     {{ reseller[1].tel_user }}
@@ -45,7 +48,7 @@ export default {
         polySelected: {
             type: Object,
             default: () => ({})
-        }
+        },
     },
     data: () => ({
         resellersData: "",
@@ -71,6 +74,10 @@ export default {
             else if (this.resellersNumber > 1){
                 this.resellersNumberDescription = "revendeurs trouvés"
             }
+        },
+        resellers() {
+            // console.log("this.resellersNumber : ", this.resellersNumber);
+            this.$emit("getResellers", this.resellers)
         }
     },
     mounted() {
@@ -132,12 +139,24 @@ export default {
 
 <style lang="scss">
 .resellers {
-    position: relative;
-    top: 0;
+    position: absolute;
+    bottom: 0;
     left: 0;
-    height: 100vh;
-    width: 40vw;
+    height: 80vh;
+    width: 35vw;
     background: #fff;
+    
+    &_header {
+        background-color: #2c2b2c;
+        color: #fff;
+        text-align: center;
+        padding: 2rem;
+
+        &_number {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+    }
 
     &_list {
         padding: 0;
@@ -150,9 +169,10 @@ export default {
 
             &_name {
                 font-weight: bold;
+                font-size: 1rem;
             }
 
-            &_name, &_type, &_adress, &_codeAndCity, &_telephone {
+            &_name, &_type, &_adress, &_telephone {
                 margin-bottom: 0.25rem;
             }
         }
