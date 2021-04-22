@@ -35,6 +35,8 @@ export default {
         this.configMap(this.map)
         this.getPolyDepartment()
         this.detectIfClickIsInside(this.map)
+
+        console.log(this.$config)
     },
 
     methods: {
@@ -44,12 +46,10 @@ export default {
         },
 
         initMap() {
-            mapboxgl.accessToken =
-                "pk.eyJ1IjoiZ3JlZ29yeWNvbG9tYmUiLCJhIjoiY2sxdWY0bXJyMDV2bDNjcW1rdnI5azM4byJ9.6csVhKC7yWAmHFl6OmFBCw"
+            mapboxgl.accessToken = this.$config.mapboxToken
             this.map = new mapboxgl.Map({
                 container: "map",
-                // style: 'mapbox://styles/mapbox/streets-v11',
-                style: "mapbox://styles/gregorycolombe/ck52ab1nu0eag1cpqsoaf6rkv",
+                style: this.$config.mapboxStyle,
                 center: [2.3334804999999506, 46.8770224],
                 zoom: 5.2
             })

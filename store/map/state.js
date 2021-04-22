@@ -1,3 +1,3 @@
 export default () => ({
-    resellers: []
+    resellers: {}
 })
