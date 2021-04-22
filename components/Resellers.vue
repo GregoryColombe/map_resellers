@@ -7,9 +7,9 @@
         </div>
 
         <ul class="resellers_list">
-            <li 
-                v-for="(reseller, i) in resellers" 
-                :key="i" 
+            <li
+                v-for="(reseller, i) in resellers"
+                :key="i"
                 class="resellers_list_item"
             >
                 <p class="resellers_list_item_name">
@@ -88,7 +88,7 @@ export default {
 
         findResellers() {
             const result = []
-            for (const i in this.resellersData) {
+            for (let i = 0; i < this.resellersData.length; i++) {
                 result.push([i, this.resellersData[i]])
             }
             result.forEach((reseller) => {
