@@ -273,15 +273,14 @@ export default {
                     const polyDepartmentIsInside = this.$turf.inside(this.clickCoordinates, poly)
 
                     if (polyDepartmentIsInside === true) {
-                        const promise = new Promise((resolve) => {
+                        new Promise((resolve) => {
                             resolve(
                                 this.map.flyTo({
                                     center: this.clickCoordinates,
                                     zoom: 6.2
                                 })
                             )
-                        })
-                        promise.then(() => {
+                        }).then(() => {
                             setTimeout(() => {
                                 this.polySelected = poly
                                 this.findingResellers = true

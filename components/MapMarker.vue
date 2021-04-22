@@ -30,7 +30,7 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            modal: "socials/getData"
+            modal: "map/getData"
         })
     },
     watch: {
