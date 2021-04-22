@@ -1,16 +1,16 @@
 <template>
     <div>
         <div id="map" />
-        <!--                <Resellers-->
-        <!--                    :finding-resellers="findingResellers"-->
-        <!--                    :poly-department="polyDepartments"-->
-        <!--                    :poly-selected="polySelected"-->
-        <!--                />-->
-        <!--                <MapMarker-->
-        <!--                    :map="map"-->
-        <!--                    :click-coordinates="clickCoordinates"-->
-        <!--                    color="#1b65c5"-->
-        <!--                />-->
+        <Resellers
+            :finding-resellers="findingResellers"
+            :poly-department="polyDepartment"
+            :poly-selected="polySelected"
+        />
+        <MapMarker
+            :map="map"
+            :click-coordinates="clickCoordinates"
+            color="#1b65c5"
+        />
     </div>
 </template>
 
@@ -22,15 +22,18 @@ export default {
     name: "Map",
     data: () => ({
         map: {},
+        polyDepartment: {},
+        customData: "",
+        clickCoordinates: [],
         findingResellers: false,
         polySelected: {},
-        resellers: []
     }),
     computed: {
         ...mapGetters({
             polyDepartments: "map/getPolyDepartments"
         })
     },
+
     methods: {
         ...mapActions({
             getPolyDepartments: "map/getPolyDepartments"

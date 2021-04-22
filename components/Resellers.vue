@@ -13,22 +13,40 @@
         </div>
 
         <ul class="resellers_list">
-            <li
-                v-for="(reseller, i) in resellers"
-                :key="i"
+            <li 
+                v-for="(item, i) in resellers.proximite"
+                :key="'proximite-' + i"
                 class="resellers_list_item"
             >
                 <p class="resellers_list_item_name">
-                    {{ reseller[1].societe_user }}
+                    {{ item.societe_user }}
                 </p>
                 <p class="resellers_list_item_type">
-                    Revendeur <span v-if="reseller[1].type === 'proximité'">de</span> {{ reseller[1].type }}
+                    Revendeur de proximité
                 </p>
                 <p class="resellers_list_item_adress">
-                    {{ reseller[1].adresse1_user }} {{ reseller[1].cp_user }}
+                    {{ item.adresse1_user }} {{ item.cp_user }}
                 </p>
                 <p class="resellers_list_item_telephone">
-                    {{ reseller[1].tel_user }}
+                    {{ item.tel_user }}
+                </p>
+            </li>
+            <li 
+                v-for="(item, i) in resellers.agreer"
+                :key="'agreer-' + i"
+                class="resellers_list_item"
+            >
+                <p class="resellers_list_item_name">
+                    {{ item.societe_user }}
+                </p>
+                <p class="resellers_list_item_type">
+                    Revendeur agrée
+                </p>
+                <p class="resellers_list_item_adress">
+                    {{ item.adresse1_user }} {{ item.cp_user }}
+                </p>
+                <p class="resellers_list_item_telephone">
+                    {{ item.tel_user }}
                 </p>
             </li>
         </ul>
@@ -36,6 +54,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 
 export default {
     name: "Resellers",
@@ -52,18 +71,20 @@ export default {
     },
     data: () => ({
         resellersData: "",
-        resellers: [],
-        resellersProximity: [],
-        resellersApproved: [],
         resellersNumber: 0,
-        resellersNumberDescription: ""
+        resellersNumberDescription: "",
     }),
+    computed: {
+        ...mapGetters({
+            resellers: "map/getResellers"
+        })
+    },
     watch: {
+        resellers() {
+            this.changeResselersNumber()
+        },
         findingResellers() {
-            if (this.findingResellers === true) {
-                this.resellers = []
-                this.resellersApproved = []
-                this.resellersProximity = []
+            if (this.findingResellers) {
                 this.findResellers()
             }
         },
@@ -75,63 +96,26 @@ export default {
                 this.resellersNumberDescription = "revendeurs trouvés"
             }
         },
-        resellers() {
-            // console.log("this.resellersNumber : ", this.resellersNumber);
-            this.$emit("getResellers", this.resellers)
-        }
     },
     mounted() {
-        this.init()
+        this.getData()
     },
 
     methods: {
+        ...mapActions({
+            getResellersByDep: "map/getResellersByDep"
+        }),
+
         async getData() {
             this.resellersData = await this.$axios.$get("/resellersData.json")
         },
 
-        init() {
-            this.getData()
-        },
-
         findResellers() {
-            const result = []
-            for (let i = 0; i < this.resellersData.length; i++) {
-                result.push([i, this.resellersData[i]])
-            }
-            result.forEach((reseller) => {
-                this.isProximite(reseller)
-                this.isAgree(reseller)
-            })
-        },
-
-        isProximite(reseller) {
-            const revendeurZoneAction = reseller[1].zone_action.split(";")
-
-            revendeurZoneAction.forEach((revendeurZoneActionItem) => {
-                if (revendeurZoneActionItem === this.polySelected.properties.code) {
-                    reseller[1].type = "proximité"
-                    reseller[1].proximity = this.resellers.length
-                    this.resellers.push(reseller)
-                    this.resellersProximity.push(reseller[1].type)
-                    this.changeResselersNumber()
-                }
-            })
-        },
-
-        isAgree(reseller) {
-            const cpFormated = reseller[1].cp_user.slice(0, 2)
-
-            if (cpFormated === this.polySelected.properties.code) {
-                reseller[1].type = "agrée"
-                reseller[1].agree = this.resellers.length
-                this.resellers.push(reseller)
-                this.resellersApproved.push(reseller[1].type)
-                this.changeResselersNumber()
-            }
+            this.getResellersByDep(this.polySelected.properties.code)
         },
 
         changeResselersNumber() {
-            this.resellersNumber = this.resellersApproved.length + this.resellersProximity.length
+            this.resellersNumber = this.resellers.agreer.length + this.resellers.proximite.length
         }
     },
 }
