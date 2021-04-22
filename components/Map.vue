@@ -2,6 +2,7 @@
     <div>
         <div id="map" />
         <Resellers
+            @getResellers="getResellers"
             :finding-resellers="findingResellers"
             :poly-department="polyDepartment"
             :poly-selected="polySelected"
@@ -9,16 +10,13 @@
         <MapMarker
             :map="map"
             :click-coordinates="clickCoordinates"
+            :resellers="resellers"
             color="#1b65c5"
         />
     </div>
 </template>
 
 <script>
-import "mapbox-gl/dist/mapbox-gl.css"
-import mapboxgl from "mapbox-gl"
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
-
 export default {
     name: "Map",
     data: () => ({
@@ -27,7 +25,8 @@ export default {
         customData: "",
         clickCoordinates: [],
         findingResellers: false,
-        polySelected: {}
+        polySelected: {},
+        resellers: []
     }),
     mounted() {
         this.initMap()
@@ -43,10 +42,14 @@ export default {
             this.loadPoly(this.map, this.polyDepartment)
         },
 
+        getResellers(resellers) {
+            this.resellers = resellers
+        },
+
         initMap() {
-            mapboxgl.accessToken =
+            this.$mapboxgl.accessToken =
                 "pk.eyJ1IjoiZ3JlZ29yeWNvbG9tYmUiLCJhIjoiY2sxdWY0bXJyMDV2bDNjcW1rdnI5azM4byJ9.6csVhKC7yWAmHFl6OmFBCw"
-            this.map = new mapboxgl.Map({
+            this.map = new this.$mapboxgl.Map({
                 container: "map",
                 // style: 'mapbox://styles/mapbox/streets-v11',
                 style: "mapbox://styles/gregorycolombe/ck52ab1nu0eag1cpqsoaf6rkv",
@@ -243,12 +246,12 @@ export default {
 
         // Map Configuration
         configMap(map) {
-            map.addControl(new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
+            map.addControl(new this.$MapboxGeocoder({
+                accessToken: this.$mapboxgl.accessToken,
                 localGeocoder: this.forwardGeocoder,
                 zoom: 7.2,
                 placeholder: "Rechercher un lieu",
-                mapboxgl
+                mapboxgl: this.$mapboxgl
             }))
 
             map.dragPan._state = "enabled"
