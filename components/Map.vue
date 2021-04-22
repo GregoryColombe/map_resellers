@@ -16,8 +16,6 @@
 
 <script>
 import "mapbox-gl/dist/mapbox-gl.css"
-// import mapboxgl from "mapbox-gl"
-// import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 
 export default {
     name: "Map",
@@ -32,7 +30,6 @@ export default {
     }),
     mounted() {
         this.initMap()
-        this.addCustomData()
         this.configMap(this.map)
         this.getPolyDepartment()
         this.detectIfClickIsInside(this.map)
@@ -49,8 +46,8 @@ export default {
         },
 
         initMap() {
-            mapboxgl.accessToken = this.$config.mapboxToken
-            this.map = new mapboxgl.Map({
+            this.$mapboxgl.accessToken = this.$config.mapboxToken
+            this.map = new this.$mapboxgl.Map({
                 container: "map",
                 style: this.$config.mapboxStyle,
                 center: [2.3334804999999506, 46.8770224],
