@@ -41,10 +41,6 @@ export default {
             this.loadPoly(this.map, this.polyDepartment)
         },
 
-        getResellers(resellers) {
-            this.resellers = resellers
-        },
-
         initMap() {
             this.$mapboxgl.accessToken = this.$config.mapboxToken
             this.map = new this.$mapboxgl.Map({
