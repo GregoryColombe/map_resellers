@@ -80,7 +80,6 @@ export default {
     },
     watch: {
         polySelected() {
-            // console.log("polySelected : ", this.polySelected);
             this.findResellers()
         },
         resellers() {
@@ -109,10 +108,7 @@ export default {
         },
 
         findResellers() {
-            // this.polySelected.x.properties.code
-            // if (this.findingResellers) {
             this.getResellersByDep(this.polySelected)
-            // }
         },
 
         changeResselersNumber() {
