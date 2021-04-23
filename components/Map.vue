@@ -89,20 +89,14 @@ export default {
                 })
             })
         },
-        
+
         onPolygoneClick() {
             this.map.on("click", e => {
                 const clickCoordinates       = [e.lngLat.lng, e.lngLat.lat]
                 const polyDepartmentSelected = this.polyDepartments.source.data.features
-                const checkPointInPoly       = polyDepartmentSelected.some(x => {
-                    this.$turf.booleanPointInPolygon(clickCoordinates, x)
-                    if (this.$turf.booleanPointInPolygon(clickCoordinates, x)) {
-                        console.log("x ", x);
-                        checkPointInPoly && this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
-                        this.polySelected = [x.properties.code]
-                    }
-                })
-                
+                const checkPointInPoly       = polyDepartmentSelected.some(x => this.$turf.booleanPointInPolygon(clickCoordinates, x))
+
+                checkPointInPoly && this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
             })
         }
     },

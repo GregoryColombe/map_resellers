@@ -26,14 +26,22 @@ export default {
     plugins: [
         "~/plugins/extensions.client.js"
     ],
-    components: true,
+    components: false,
     buildModules: [
-        "@nuxtjs/eslint-module"
+        "@nuxtjs/eslint-module",
+        "@nuxtjs/fontawesome"
     ],
     modules: [
         "@nuxtjs/axios",
         "@nuxtjs/dotenv"
     ],
+    fontawesome: {
+        component: "fa",
+        suffix: true,
+        icons: {
+            solid: ["faPhone", "faTimes", "faEnvelope", "faGlobe"]
+        }
+    },
     axios: {
         baseURL: process.env.BASE_URL
     },
