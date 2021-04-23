@@ -1,31 +1,52 @@
 <template>
-    <div class="resellers">
-        <div class="resellers_number">
-            <h1 v-if="resellersNumber">
+    <div 
+        v-if="resellersNumber" 
+        class="resellers"
+    >
+        <div class="resellers_header">
+            <p 
+                v-if="resellersNumber" 
+                class="resellers_header_number"
+            >
                 {{ resellersNumber }} <span>{{ resellersNumberDescription }}</span>
-            </h1>
+            </p>
         </div>
 
         <ul class="resellers_list">
             <li 
-                v-for="(reseller, i) in resellers" 
-                :key="i" 
+                v-for="(item, i) in resellers.proximite"
+                :key="'proximite-' + i"
                 class="resellers_list_item"
             >
                 <p class="resellers_list_item_name">
-                    {{ reseller[1].societe_user }}
+                    {{ item.societe_user }}
                 </p>
                 <p class="resellers_list_item_type">
-                    Revendeur <span v-if="reseller[1].type === 'proximité'">de</span> {{ reseller[1].type }}
+                    Revendeur de proximité
                 </p>
                 <p class="resellers_list_item_adress">
-                    {{ reseller[1].adresse1_user }}
-                </p>
-                <p class="resellers_list_item_codeAndCity">
-                    {{ reseller[1].cp_user }}
+                    {{ item.adresse1_user }} {{ item.cp_user }}
                 </p>
                 <p class="resellers_list_item_telephone">
-                    {{ reseller[1].tel_user }}
+                    {{ item.tel_user }}
+                </p>
+            </li>
+            <li 
+                v-for="(item, i) in resellers.agreer"
+                :key="'agreer-' + i"
+                class="resellers_list_item"
+            >
+                <p class="resellers_list_item_name">
+                    {{ item.societe_user }}
+                </p>
+                <p class="resellers_list_item_type">
+                    Revendeur agrée
+                </p>
+                <p class="resellers_list_item_adress">
+                    {{ item.adresse1_user }} {{ item.cp_user }}
+                </p>
+                <p class="resellers_list_item_telephone">
+                    {{ item.tel_user }}
                 </p>
             </li>
         </ul>
@@ -33,36 +54,36 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 
 export default {
     name: "Resellers",
     props: {
-        findingResellers: Boolean,
         polyDepartment: {
             type: Object,
             default: () => ({})
         },
         polySelected: {
-            type: Object,
-            default: () => ({})
-        }
+            type: Array,
+            default: () => ([])
+        },
     },
     data: () => ({
         resellersData: "",
-        resellers: [],
-        resellersProximity: [],
-        resellersApproved: [],
         resellersNumber: 0,
-        resellersNumberDescription: ""
+        resellersNumberDescription: "",
     }),
+    computed: {
+        ...mapGetters({
+            resellers: "map/getResellers"
+        })
+    },
     watch: {
-        findingResellers() {
-            if (this.findingResellers === true) {
-                this.resellers = []
-                this.resellersApproved = []
-                this.resellersProximity = []
-                this.findResellers()
-            }
+        polySelected() {
+            this.findResellers()
+        },
+        resellers() {
+            this.changeResselersNumber()
         },
         resellersNumber() {
             if (this.resellersNumber === 1) {
@@ -71,61 +92,35 @@ export default {
             else if (this.resellersNumber > 1){
                 this.resellersNumberDescription = "revendeurs trouvés"
             }
-        }
+        },
     },
     mounted() {
+<<<<<<< HEAD
       this.init()
       console.log(process.env.BASE_URL)
+=======
+        this.getData()
+>>>>>>> dev
     },
 
     methods: {
+        ...mapActions({
+            getResellersByDep: "map/getResellersByDep"
+        }),
+
         async getData() {
             this.resellersData = await this.$axios.$get("/resellersData.json")
         },
 
-        init() {
-            this.getData()
-        },
-
         findResellers() {
-            const result = []
-            for (const i in this.resellersData) {
-                result.push([i, this.resellersData[i]])
-            }
-            result.forEach((reseller) => {
-                this.isProximite(reseller)
-                this.isAgree(reseller)
-            })
-        },
-
-        isProximite(reseller) {
-            const revendeurZoneAction = reseller[1].zone_action.split(";")
-
-            revendeurZoneAction.forEach((revendeurZoneActionItem) => {
-                if (revendeurZoneActionItem === this.polySelected.properties.code) {
-                    reseller[1].type = "proximité"
-                    reseller[1].proximity = this.resellers.length
-                    this.resellers.push(reseller)
-                    this.resellersProximity.push(reseller[1].type)
-                    this.changeResselersNumber()
-                }
-            })
-        },
-
-        isAgree(reseller) {
-            const cpFormated = reseller[1].cp_user.slice(0, 2)
-
-            if (cpFormated === this.polySelected.properties.code) {
-                reseller[1].type = "agrée"
-                reseller[1].agree = this.resellers.length
-                this.resellers.push(reseller)
-                this.resellersApproved.push(reseller[1].type)
-                this.changeResselersNumber()
-            }
+            // this.polySelected.x.properties.code
+            // if (this.findingResellers) {
+            this.getResellersByDep(this.polySelected)
+            // }
         },
 
         changeResselersNumber() {
-            this.resellersNumber = this.resellersApproved.length + this.resellersProximity.length
+            this.resellersNumber = this.resellers.agreer.length + this.resellers.proximite.length
         }
     },
 }
@@ -133,12 +128,24 @@ export default {
 
 <style lang="scss">
 .resellers {
-    position: relative;
-    top: 0;
+    position: absolute;
+    bottom: 0;
     left: 0;
-    height: 100vh;
-    width: 40vw;
+    height: 80vh;
+    width: 35vw;
     background: #fff;
+    
+    &_header {
+        background-color: #2c2b2c;
+        color: #fff;
+        text-align: center;
+        padding: 2rem;
+
+        &_number {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+    }
 
     &_list {
         padding: 0;
@@ -153,9 +160,10 @@ export default {
 
             &_name {
                 font-weight: bold;
+                font-size: 1rem;
             }
 
-            &_name, &_type, &_adress, &_codeAndCity, &_telephone {
+            &_name, &_type, &_adress, &_telephone {
                 margin-bottom: 0.25rem;
             }
         }

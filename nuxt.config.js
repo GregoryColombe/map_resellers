@@ -15,11 +15,11 @@ export default {
         ]
     },
     publicRuntimeConfig: {
-        baseURL: process.env.BASE_URL || "http://localhost:3000"
+        baseURL: process.env.BASE_URL || "http://localhost:3000",
+        mapboxToken: process.env.MAPBOX_TOKEN,
+        mapboxStyle: process.env.MAPBOX_STYLE
     },
-    privateRuntimeConfig: {
-
-    },
+    privateRuntimeConfig: {},
     css: [
         "~/assets/style/style.scss"
     ],
