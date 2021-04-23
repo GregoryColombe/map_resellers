@@ -80,7 +80,6 @@ export default {
     },
     watch: {
         polySelected() {
-            // console.log("polySelected : ", this.polySelected);
             this.findResellers()
         },
         resellers() {
@@ -96,12 +95,7 @@ export default {
         },
     },
     mounted() {
-<<<<<<< HEAD
-      this.init()
-      console.log(process.env.BASE_URL)
-=======
         this.getData()
->>>>>>> dev
     },
 
     methods: {
@@ -114,10 +108,7 @@ export default {
         },
 
         findResellers() {
-            // this.polySelected.x.properties.code
-            // if (this.findingResellers) {
             this.getResellersByDep(this.polySelected)
-            // }
         },
 
         changeResselersNumber() {
@@ -152,8 +143,6 @@ export default {
         padding: 0;
         color:#fff;
 
-<<<<<<< HEAD
-=======
         &_item {
             background-color: #4fa9dd;
             margin: 1rem 2rem;
@@ -170,5 +159,4 @@ export default {
         }
     }
 }
->>>>>>> dev
 </style>
