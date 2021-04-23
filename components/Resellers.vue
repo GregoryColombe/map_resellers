@@ -126,6 +126,7 @@ export default {
     height: 80vh;
     width: 35vw;
     background: #fff;
+    // color: red;
     
     &_header {
         background-color: #2c2b2c;
