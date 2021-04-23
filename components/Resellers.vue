@@ -80,6 +80,7 @@ export default {
     },
     watch: {
         polySelected() {
+            // console.log("polySelected : ", this.polySelected);
             this.findResellers()
         },
         resellers() {
