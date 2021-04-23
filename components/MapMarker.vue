@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
 
 export default {
     name: "MapMarker",
@@ -28,16 +27,12 @@ export default {
     data: () => ({
         coordinates: ""
     }),
-    computed: {
-        ...mapGetters({
-            modal: "map/getData"
-        })
-    },
+    
     watch: {
-        // clickCoordinates() {
-        //     this.deleteAllMarkers()
-        //     this.addMarkers()
-        // },
+        clickCoordinates() {
+            this.deleteAllMarkers()
+            this.addMarkers()
+        },
         resellers() {
             this.deleteAllMarkers()
             this.addMarkers()
@@ -52,6 +47,7 @@ export default {
         },
 
         addMarkers() {
+            console.log("ok my meen");
             this.addClickMarker("#F3DB2F", this.clickCoordinates)
             this.addResellersMarker("#FF0000")
         },

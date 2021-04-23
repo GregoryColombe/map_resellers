@@ -2,7 +2,6 @@
     <div>
         <div id="map" />
         <Resellers
-            :finding-resellers="findingResellers"
             :poly-department="polyDepartment"
             :poly-selected="polySelected"
         />
@@ -25,8 +24,7 @@ export default {
         polyDepartment: {},
         customData: "",
         clickCoordinates: [],
-        findingResellers: false,
-        polySelected: {},
+        polySelected: [],
     }),
     computed: {
         ...mapGetters({
@@ -91,13 +89,20 @@ export default {
                 })
             })
         },
+        
         onPolygoneClick() {
             this.map.on("click", e => {
                 const clickCoordinates       = [e.lngLat.lng, e.lngLat.lat]
                 const polyDepartmentSelected = this.polyDepartments.source.data.features
-                const checkPointInPoly       = polyDepartmentSelected.some(x => this.$turf.booleanPointInPolygon(clickCoordinates, x))
-
-                checkPointInPoly && this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
+                const checkPointInPoly       = polyDepartmentSelected.some(x => {
+                    this.$turf.booleanPointInPolygon(clickCoordinates, x)
+                    if (this.$turf.booleanPointInPolygon(clickCoordinates, x)) {
+                        console.log("x ", x);
+                        checkPointInPoly && this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
+                        this.polySelected = [x.properties.code]
+                    }
+                })
+                
             })
         }
     },

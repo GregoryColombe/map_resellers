@@ -1,6 +1,6 @@
 <template>
     <div 
-        v-if="findingResellers" 
+        v-if="resellersNumber" 
         class="resellers"
     >
         <div class="resellers_header">
@@ -59,14 +59,13 @@ import { mapGetters, mapActions } from "vuex"
 export default {
     name: "Resellers",
     props: {
-        findingResellers: Boolean,
         polyDepartment: {
             type: Object,
             default: () => ({})
         },
         polySelected: {
-            type: Object,
-            default: () => ({})
+            type: Array,
+            default: () => ([])
         },
     },
     data: () => ({
@@ -80,13 +79,11 @@ export default {
         })
     },
     watch: {
+        polySelected() {
+            this.findResellers()
+        },
         resellers() {
             this.changeResselersNumber()
-        },
-        findingResellers() {
-            if (this.findingResellers) {
-                this.findResellers()
-            }
         },
         resellersNumber() {
             if (this.resellersNumber === 1) {
@@ -111,7 +108,10 @@ export default {
         },
 
         findResellers() {
-            this.getResellersByDep(this.polySelected.properties.code)
+            // this.polySelected.x.properties.code
+            // if (this.findingResellers) {
+            this.getResellersByDep(this.polySelected)
+            // }
         },
 
         changeResselersNumber() {
