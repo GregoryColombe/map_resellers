@@ -26,7 +26,6 @@ export default {
     plugins: [
         "~/plugins/extensions.client.js"
     ],
-<<<<<<< HEAD
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
@@ -39,41 +38,23 @@ export default {
     "~/plugins/extensions.client.js"
   ],
   components: true,
-  buildModules: [],
-  modules: [
-    '@nuxtjs/axios',
-  ],
-  axios: {
-    baseURL: process.env.BASE_URL
-  },
-  build: {
-    // publicPath: '/',
-    // extractCSS: true,
-    // optimization: {
-    //   splitChunks: {
-    //     cacheGroups: {
-    //       styles: {
-    //         name: 'styles',
-    //         test: /\.(css|vue)$/,
-    //         chunks: 'all',
-    //         enforce: true
-    //       }
-    //     }
-    //   }
-    // }
-  }
-=======
-    components: true,
     buildModules: [
-        "@nuxtjs/eslint-module"
+        "@nuxtjs/eslint-module",
+        "@nuxtjs/fontawesome"
     ],
     modules: [
         "@nuxtjs/axios",
         "@nuxtjs/dotenv"
     ],
+    fontawesome: {
+        component: "fa",
+        suffix: true,
+        icons: {
+            solid: ["faPhone", "faTimes", "faEnvelope", "faGlobe"]
+        }
+    },
     axios: {
         baseURL: process.env.BASE_URL
     },
     build: {}
->>>>>>> dev
 }
