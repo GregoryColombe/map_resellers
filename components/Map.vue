@@ -25,11 +25,12 @@ export default {
         customData: "",
         clickCoordinates: [],
         polySelected: [],
+        userCoordinates: []
     }),
     computed: {
         ...mapGetters({
             polyDepartments: "map/getPolyDepartments"
-        })
+        }),
     },
 
     methods: {
@@ -47,6 +48,8 @@ export default {
                 minZoom: 3.75
             })
         },
+
+
         config() {
             this.map.dragPan.enable()
             this.map.dragRotate.disable()
@@ -98,9 +101,21 @@ export default {
 
                 checkPointInPoly && this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
             })
-        }
+        },
+
+        getLocalisation() {
+            if (navigator.geolocation) { 
+                navigator.geolocation.getCurrentPosition((position) => {
+                    this.userCoordinates.push(position.coords.longitude, position.coords.latitude)
+                    console.log("userCoordinates : ", this.userCoordinates);
+                })
+            } 
+        },
+        
     },
     mounted() {
+        console.log("Yoo!25");
+        this.getLocalisation()
         this.init()
         this.config()
 

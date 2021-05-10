@@ -4,7 +4,6 @@
             id="map"
             ref="map"
         />
-
         <Resellers />
     </div>
 </template>
@@ -20,9 +19,10 @@ import Resellers from "~/components/Resellers"
 
 export default {
     components: {
-        Resellers
+        Resellers,
     },
     data: () => ({
+        userCoordinates: [],
         colors: {
             agree: "#0abbe3",
             proximity: "#ee5253",
@@ -73,7 +73,16 @@ export default {
             const tl      = new this.$TimelineLite({delay: .5})
 
             tl.to(map, {duration: .5, width: "100%", height: "calc(100% + 1px)"})
-        }
+        },
+
+        getLocalisation() {
+            if (navigator.geolocation) { 
+                navigator.geolocation.getCurrentPosition((position) => {
+                    this.userCoordinates.push(position.coords.longitude, position.coords.latitude)
+                    console.log("userCoordinates : ", this.userCoordinates);
+                })
+            } 
+        },
     },
     watch: {
         resellers: {
@@ -109,6 +118,9 @@ export default {
                 this.getResellersByDep(null)
             }
         )
+
+        this.getLocalisation()
+
     },
     destroyed() {
         this.map.destroy()

@@ -48,7 +48,8 @@ import Reseller from "~/components/Reseller"
 export default {
     components: { Reseller },
     props: {},
-    data: () => ({}),
+    data: () => ({
+    }),
     computed: {
         ...mapGetters({
             resellers: "map/getResellers"
@@ -78,7 +79,8 @@ export default {
         }
     },
     watch: {},
-    mounted() {}
+    mounted() {
+    }
 }
 </script>
 
