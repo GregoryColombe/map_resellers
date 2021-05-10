@@ -26,18 +26,7 @@ export default {
     plugins: [
         "~/plugins/extensions.client.js"
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
-  },
-  env: {
-    BASE_URL: process.env.BASE_URL || 'http://localhost:3000'
-  },
-  css: [],
-  plugins: [
-    "~/plugins/extensions.client.js"
-  ],
-  components: true,
+    components: false,
     buildModules: [
         "@nuxtjs/eslint-module",
         "@nuxtjs/fontawesome"
