@@ -114,7 +114,6 @@ export default {
         
     },
     mounted() {
-        console.log("Yoo!25");
         this.getLocalisation()
         this.init()
         this.config()
