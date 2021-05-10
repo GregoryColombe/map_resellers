@@ -70,7 +70,7 @@ export default {
         },
         onLeave() {
             const { map } = this.$refs
-            const tl      = new this.$TimelineLite()
+            const tl      = new this.$TimelineLite({delay: .5})
 
             tl.to(map, {duration: .5, width: "100%", height: "calc(100% + 1px)"})
         }

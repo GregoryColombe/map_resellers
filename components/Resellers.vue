@@ -66,7 +66,7 @@ export default {
         //Animations
         onEnter() {
             const { resellers } = this.$refs
-            const tl = new this.$TimelineLite()
+            const tl = new this.$TimelineLite({delay: .5})
 
             tl.to(resellers, {duration: .5, x: 0})
         },
