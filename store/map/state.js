@@ -1,4 +1,3 @@
 export default () => ({
-    resellers: {},
-    polyDepartments: []
+    resellers: null,
 })

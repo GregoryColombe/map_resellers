@@ -1,161 +1,158 @@
 <template>
-    <div 
-        v-if="resellersNumber" 
-        class="resellers"
+    <transition
+        @enter="onEnter"
+        @leave="onLeave"
     >
-        <div class="resellers_header">
-            <p 
-                v-if="resellersNumber" 
-                class="resellers_header_number"
-            >
-                {{ resellersNumber }} <span>{{ resellersNumberDescription }}</span>
-            </p>
-        </div>
+        <div
+            ref="resellers"
+            class="resellers"
+            v-show="resellers"
+        >
+            <header class="resellers-header">
+                <h1>Resellers List</h1>
 
-        <ul class="resellers_list">
-            <li 
-                v-for="(item, i) in resellers.proximite"
-                :key="'proximite-' + i"
-                class="resellers_list_item"
-            >
-                <p class="resellers_list_item_name">
-                    {{ item.societe_user }}
-                </p>
-                <p class="resellers_list_item_type">
-                    Revendeur de proximité
-                </p>
-                <p class="resellers_list_item_adress">
-                    {{ item.adresse1_user }} {{ item.cp_user }}
-                </p>
-                <p class="resellers_list_item_telephone">
-                    {{ item.tel_user }}
-                </p>
-            </li>
-            <li 
-                v-for="(item, i) in resellers.agreer"
-                :key="'agreer-' + i"
-                class="resellers_list_item"
-            >
-                <p class="resellers_list_item_name">
-                    {{ item.societe_user }}
-                </p>
-                <p class="resellers_list_item_type">
-                    Revendeur agrée
-                </p>
-                <p class="resellers_list_item_adress">
-                    {{ item.adresse1_user }} {{ item.cp_user }}
-                </p>
-                <p class="resellers_list_item_telephone">
-                    {{ item.tel_user }}
-                </p>
-            </li>
-        </ul>
-    </div>
+                <button
+                    class="--icon"
+                    @click="onCloseModal"
+                >
+                    <fa-icon icon="times" />
+                </button>
+            </header>
+
+            <section class="resellers-list">
+                <ul v-if="resellers">
+                    <Reseller
+                        v-for="(data, i) in resellers.agree"
+                        :key="`agree-${i}`"
+                        :data="data"
+                        type="Agree"
+                    />
+
+                    <Reseller
+                        v-for="(data, i) in resellers.proximity"
+                        :key="`proximity-${i}`"
+                        :data="data"
+                        type="Proximity"
+                    />
+                </ul>
+            </section>
+        </div>
+    </transition>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
 
+import Reseller from "~/components/Reseller"
+
 export default {
-    name: "Resellers",
-    props: {
-        polyDepartment: {
-            type: Object,
-            default: () => ({})
-        },
-        polySelected: {
-            type: Array,
-            default: () => ([])
-        },
-    },
+    components: { Reseller },
+    props: {},
     data: () => ({
-        resellersData: "",
-        resellersNumber: 0,
-        resellersNumberDescription: "",
     }),
     computed: {
         ...mapGetters({
             resellers: "map/getResellers"
         })
     },
-    watch: {
-        polySelected() {
-            this.findResellers()
-        },
-        resellers() {
-            this.changeResselersNumber()
-        },
-        resellersNumber() {
-            if (this.resellersNumber === 1) {
-                this.resellersNumberDescription = "revendeur trouvé"
-            }
-            else if (this.resellersNumber > 1){
-                this.resellersNumberDescription = "revendeurs trouvés"
-            }
-        },
-    },
-    mounted() {
-        this.getData()
-    },
-
     methods: {
         ...mapActions({
             getResellersByDep: "map/getResellersByDep"
         }),
 
-        async getData() {
-            this.resellersData = await this.$axios.$get("/resellersData.json")
+        onCloseModal() {
+            this.getResellersByDep(null)
         },
 
-        findResellers() {
-            this.getResellersByDep(this.polySelected)
-        },
+        //Animations
+        onEnter() {
+            const { resellers } = this.$refs
+            const tl = new this.$TimelineLite({delay: .5})
 
-        changeResselersNumber() {
-            this.resellersNumber = this.resellers.agreer.length + this.resellers.proximite.length
+            tl.to(resellers, {duration: .5, x: 0})
+        },
+        onLeave(el, done) {
+            const { resellers } = this.$refs
+            const tl = new this.$TimelineLite({onComplete: () => done()})
+
+            tl.to(resellers, {duration: .5, x: "-100%"})
         }
     },
+    watch: {},
+    mounted() {
+    }
 }
 </script>
 
 <style lang="scss">
-.resellers {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 80vh;
-    width: 35vw;
-    background: #fff;
-    
-    &_header {
-        background-color: #2c2b2c;
-        color: #fff;
-        text-align: center;
-        padding: 2rem;
+$background: #f5f8fe;
+$font-color: #43435c;
+$icon-color: #cecfda;
 
-        &_number {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
+.resellers {
+    width: 30vw;
+    height: 100vh;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px;
+    box-sizing: border-box;
+
+    background-color: $background;
+
+    .--icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 30px;
+        height: 30px;
+
+        background-color: white;
+        color: $icon-color;
+
     }
 
-    &_list {
-        padding: 0;
-        color:#fff;
+    button {
+        border: {
+            style: none;
+            radius: 5px
+        }
 
-        &_item {
-            background-color: #4fa9dd;
-            margin: 1rem 2rem;
-            padding: 1rem 2rem;
+        &:hover {cursor: pointer}
+        &:focus {outline: none}
+    }
 
-            &_name {
-                font-weight: bold;
-                font-size: 1rem;
-            }
+    &-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-            &_name, &_type, &_adress, &_telephone {
-                margin-bottom: 0.25rem;
-            }
+        margin-bottom: 20px;
+
+        h1 {
+            font-size: 22px;
+            color: $font-color;
+        }
+    }
+    &-list {
+        height: 100%;
+        overflow-y: auto;
+
+        border-radius: 10px;
+
+        ul {
+            padding: 0;
+            margin: 0;
+
+            list-style: none;
         }
     }
 }

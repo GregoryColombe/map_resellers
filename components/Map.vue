@@ -25,11 +25,12 @@ export default {
         customData: "",
         clickCoordinates: [],
         polySelected: [],
+        userCoordinates: []
     }),
     computed: {
         ...mapGetters({
             polyDepartments: "map/getPolyDepartments"
-        })
+        }),
     },
 
     methods: {
@@ -47,6 +48,8 @@ export default {
                 minZoom: 3.75
             })
         },
+
+
         config() {
             this.map.dragPan.enable()
             this.map.dragRotate.disable()
@@ -89,22 +92,29 @@ export default {
                 })
             })
         },
-        
+
         onPolygoneClick() {
             this.map.on("click", e => {
                 const clickCoordinates       = [e.lngLat.lng, e.lngLat.lat]
                 const polyDepartmentSelected = this.polyDepartments.source.data.features
-                polyDepartmentSelected.some(x => {
-                    this.$turf.booleanPointInPolygon(clickCoordinates, x)
-                    if (this.$turf.booleanPointInPolygon(clickCoordinates, x)) {
-                        this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
-                        this.polySelected = [x.properties.code]
-                    }
-                })
+                const checkPointInPoly       = polyDepartmentSelected.some(x => this.$turf.booleanPointInPolygon(clickCoordinates, x))
+
+                checkPointInPoly && this.map.flyTo({ center: clickCoordinates, zoom: 6.2 })
             })
-        }
+        },
+
+        getLocalisation() {
+            if (navigator.geolocation) { 
+                navigator.geolocation.getCurrentPosition((position) => {
+                    this.userCoordinates.push(position.coords.longitude, position.coords.latitude)
+                    console.log("userCoordinates : ", this.userCoordinates);
+                })
+            } 
+        },
+        
     },
     mounted() {
+        this.getLocalisation()
         this.init()
         this.config()
 

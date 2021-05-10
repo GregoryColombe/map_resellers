@@ -1,11 +1,5 @@
 import Vue from "vue"
+import { TimelineLite, Power4 } from "gsap"
 
-import "mapbox-gl/dist/mapbox-gl.css"
-
-import * as turf from "@turf/turf"
-import mapboxgl from "mapbox-gl"
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
-
-Vue.prototype.$turf = turf
-Vue.prototype.$mapboxgl = mapboxgl
-Vue.prototype.$MapboxGeocoder = MapboxGeocoder
+Vue.prototype.$TimelineLite = TimelineLite
+Vue.prototype.$Ease         = Power4

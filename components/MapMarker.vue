@@ -40,10 +40,10 @@ export default {
     },
     mounted() {
         this.init()
+        this.getLocalisation()
     },
     methods: {
         init() {
-
         },
 
         addMarkers() {
@@ -55,6 +55,10 @@ export default {
             const marker = new this.$mapboxgl.Marker({ color: colorMarker })
             marker.setLngLat(position)
             marker.addTo(this.map)
+        },
+
+        addLocalisationMarker() {
+            console.log("localisation");
         },
 
         addResellersMarker(colorMarker) {
@@ -87,7 +91,8 @@ export default {
         },
         deleteAllMarkers() {
             document.querySelectorAll(".mapboxgl-marker").forEach(e => e.remove())
-        }
+        },
+        
     }
 }
 </script>
