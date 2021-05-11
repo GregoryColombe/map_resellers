@@ -47,7 +47,12 @@ import Reseller from "~/components/Reseller"
 
 export default {
     components: { Reseller },
-    props: {},
+    props: {
+        localisationDepartment: {
+            type: Number,
+            default: () => (0)
+        }, 
+    },
     data: () => ({
     }),
     computed: {
@@ -78,7 +83,11 @@ export default {
             tl.to(resellers, {duration: .5, x: "-100%"})
         }
     },
-    watch: {},
+    watch: {
+        localisationDepartment: function () {
+            this.getResellersByDep(this.localisationDepartment)
+        }
+    },
     mounted() {
     }
 }

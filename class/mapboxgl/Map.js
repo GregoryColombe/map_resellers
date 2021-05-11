@@ -75,9 +75,9 @@ export default class Map {
 
     addMarker(position, color) {
         const marker = new mapboxgl.Marker({ color }).setLngLat(position).addTo(this.map)
-
         this.markers.push(marker)
     }
+
     destroyMarkers() {
         this.markers.forEach(marker => {
             marker.remove()
@@ -118,5 +118,9 @@ export default class Map {
     }
     getCodeDepartmentSelected() {
         return this.departmentSelected.properties.code
+    }
+
+    zoomInMap(coordinates) {
+        this.map.flyTo({ center: coordinates, zoom: 9 })
     }
 }
