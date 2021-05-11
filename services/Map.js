@@ -9,3 +9,6 @@ export const getPolygonsDepartments = function() {
 export const getCoordinatesByAddress = function(address, cp) {
     return axios.get(`https://api-adresse.data.gouv.fr/search/?q=${address}&postcode=${cp}`)
 }
+export const getAddressByCoordinates = function(long, lat) {
+    return axios.get(`https://api-adresse.data.gouv.fr/reverse/?lon=${long}&lat=${lat}`)
+}

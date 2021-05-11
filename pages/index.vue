@@ -4,7 +4,13 @@
             id="map"
             ref="map"
         />
-        <Resellers />
+        <Resellers :localisation-department="this.localisationDepartment" />
+
+        <div class="container_btn">
+            <button @click="localiseUser">
+                Localise me
+            </button>
+        </div>
     </div>
 </template>
 
@@ -12,7 +18,7 @@
 import Map from "~/class/mapboxgl/Map"
 import "mapbox-gl/dist/mapbox-gl.css"
 
-import { getCoordinatesByAddress } from "~/services/Map"
+import { getCoordinatesByAddress, getAddressByCoordinates  } from "~/services/Map"
 import { mapActions, mapGetters } from "vuex"
 
 import Resellers from "~/components/Resellers"
@@ -22,11 +28,12 @@ export default {
         Resellers,
     },
     data: () => ({
-        userCoordinates: [],
+        localisationCoordinates: [],
+        localisationDepartment: 0,
         colors: {
             agree: "#0abbe3",
             proximity: "#ee5253",
-            selected: "#00FF00"
+            selected: "#00FF00",
         }
     }),
     computed: {
@@ -54,7 +61,6 @@ export default {
                         getCoordinatesByAddress(address, item.cp_user)
                             .then(resp => {
                                 const coordinates = resp.data.features[0].geometry.coordinates
-
                                 this.map.addMarker(coordinates,this.colors[key])
                             })
                     })
@@ -75,14 +81,33 @@ export default {
             tl.to(map, {duration: .5, width: "100%", height: "calc(100% + 1px)"})
         },
 
-        getLocalisation() {
-            if (navigator.geolocation) { 
-                navigator.geolocation.getCurrentPosition((position) => {
-                    this.userCoordinates.push(position.coords.longitude, position.coords.latitude)
-                    console.log("userCoordinates : ", this.userCoordinates);
-                })
-            } 
+        localiseUser() {
+            navigator.geolocation.getCurrentPosition((position) => {
+                this.map.destroyMarkers()
+                this.localisationCoordinates = []
+                this.localisationDepartment = 0
+
+                this.localisationCoordinates.push(position.coords.longitude, position.coords.latitude)
+                this.map.zoomInMap(this.localisationCoordinates)
+                this.getCodeUserPosition(position.coords.longitude, position.coords.latitude)
+            })
         },
+
+        activeGeoLoc() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(() => {
+                    const tl = new this.$TimelineLite()
+                    tl.to(".container_btn", {display:"block", opacity: 1})
+                })
+            }
+        },
+
+        getCodeUserPosition(long, lat) {
+            getAddressByCoordinates(long, lat)
+                .then(resp => {
+                    this.localisationDepartment = parseInt(resp.data.features[0].properties.citycode.substr(0, 2)) 
+                })
+        }
     },
     watch: {
         resellers: {
@@ -94,7 +119,6 @@ export default {
                     this.map.resetSelectedDepartment()
                     this.onLeave()
                 }
-
             },
             deep: true
         }
@@ -119,8 +143,7 @@ export default {
             }
         )
 
-        this.getLocalisation()
-
+        this.activeGeoLoc()        
     },
     destroyed() {
         this.map.destroy()
@@ -145,6 +168,29 @@ $background: #f5f8fe;
 
         width: 100%;
         height: calc(100% + 1px);
+    }
+
+    &_btn {
+        position: absolute;
+        top: 2.5rem;
+        right: 2.5rem;
+        opacity: 0;
+        display: none;
+
+        button {
+            border: none;
+            background: rgba(238, 82, 83, 0.95);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+
+            &:hover {
+                cursor: pointer;
+                color: rgba(238, 82, 83, 0.95);
+                background-color: #fff;
+                transition: 0.25s ease-in-out;
+            }
+        }
     }
 }
 </style>
