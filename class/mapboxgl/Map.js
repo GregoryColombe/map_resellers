@@ -3,6 +3,9 @@ import { getPolygonsDepartments } from "~/services/Map"
 import booleanPointInPolygon from "@turf/boolean-point-in-polygon"
 import mapboxgl from "mapbox-gl"
 
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
+import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
+
 export default class Map {
     constructor(config) {
         this.config = config
@@ -11,6 +14,7 @@ export default class Map {
         this.polygons = {}
         this.markers = []
         this.departmentSelected = {}
+        this.geocoder = {}
 
         this.init()
     }
@@ -23,7 +27,20 @@ export default class Map {
         this.map.dragPan.enable()
         this.map.dragRotate.disable()
         this.map.doubleClickZoom.disable()
+        
+        //Search bar
+        let geocoder = new MapboxGeocoder({ 
+            accessToken: token, // Set the access token
+            mapboxgl: mapboxgl, // Set the mapbox-gl instance
+            language: "fr-FR",
+            marker: false,
+            placeholder: "Rechercher un lieu",
+            zoom: 6.2
+        })
+
+        document.querySelector(".searchbar").appendChild(geocoder.onAdd(this.map))
     }
+
     destroy() {
         this.map.remove()
     }
@@ -98,7 +115,6 @@ export default class Map {
 
                 if(indexPointInPoly !== undefined) {
                     this.departmentSelected = departments[indexPointInPoly]
-
                     onSelected(clickCoordinates)
                 }
 

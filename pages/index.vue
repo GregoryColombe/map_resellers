@@ -4,12 +4,21 @@
             id="map"
             ref="map"
         />
-        <Resellers :localisation-department="this.localisationDepartment" />
+        <Resellers 
+            :localisation-department="this.localisationDepartment" 
+            :search-bar-data="searchBarData" 
+        />
 
-        <div class="container_btn">
-            <button @click="localiseUser">
-                Localise me
-            </button>
+        <div class="container_ui">
+            <SearchBar 
+                :dep="this.dep" 
+                @getSearchBarData="getSearchBarData"
+            />
+            <div class="container_ui_btn">
+                <button @click="localiseUser">
+                    Localise me
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -22,19 +31,24 @@ import { getCoordinatesByAddress, getAddressByCoordinates  } from "~/services/Ma
 import { mapActions, mapGetters } from "vuex"
 
 import Resellers from "~/components/Resellers"
+import SearchBar from "~/components/SearchBar"
+
 
 export default {
     components: {
         Resellers,
+        SearchBar
     },
     data: () => ({
         localisationCoordinates: [],
         localisationDepartment: 0,
+        dep: 0,
         colors: {
             agree: "#0abbe3",
             proximity: "#ee5253",
             selected: "#00FF00",
-        }
+        },
+        searchBarData: {}
     }),
     computed: {
         ...mapGetters({
@@ -97,7 +111,7 @@ export default {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(() => {
                     const tl = new this.$TimelineLite()
-                    tl.to(".container_btn", {display:"block", opacity: 1})
+                    tl.to(".container_ui_btn", {display:"block", opacity: 1})
                 })
             }
         },
@@ -106,7 +120,12 @@ export default {
             getAddressByCoordinates(long, lat)
                 .then(resp => {
                     this.localisationDepartment = parseInt(resp.data.features[0].properties.citycode.substr(0, 2)) 
+                    this.dep = this.localisationDepartment
                 })
+        },
+
+        getSearchBarData(value) {
+            this.searchBarData = value
         }
     },
     watch: {
@@ -121,7 +140,7 @@ export default {
                 }
             },
             deep: true
-        }
+        },
     },
     mounted() {
         this.map = new Map({
@@ -137,6 +156,7 @@ export default {
             coordinates => {
                 this.map.addMarker(coordinates, this.colors.selected)
                 this.getResellersByDep(this.map.getCodeDepartmentSelected())
+                this.dep = parseInt(this.map.getCodeDepartmentSelected())
             },
             () => {
                 this.getResellersByDep(null)
@@ -170,27 +190,39 @@ $background: #f5f8fe;
         height: calc(100% + 1px);
     }
 
-    &_btn {
+    &_ui {
         position: absolute;
         top: 2.5rem;
         right: 2.5rem;
-        opacity: 0;
-        display: none;
+        display: flex;
+        height: 2rem;
 
-        button {
-            border: none;
-            background: rgba(238, 82, 83, 0.95);
-            color: #fff;
-            padding: 0.5rem 1rem;
+        &_geocoder {
             border-radius: 0.5rem;
+            border: none;
+            padding: 0 0.5rem;
+        }
 
-            &:hover {
-                cursor: pointer;
-                color: rgba(238, 82, 83, 0.95);
-                background-color: #fff;
-                transition: 0.25s ease-in-out;
+        &_btn {
+            opacity: 0;
+            display: none;
+
+            button {
+                border: none;
+                background: rgba(238, 82, 83, 0.95);
+                color: #fff;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+
+                &:hover {
+                    cursor: pointer;
+                    color: rgba(238, 82, 83, 0.95);
+                    background-color: #fff;
+                    transition: 0.25s ease-in-out;
+                }
             }
         }
     }
+
 }
 </style>
