@@ -9,7 +9,7 @@
             v-show="resellers"
         >
             <header class="resellers-header">
-                <h1>Resellers List</h1>
+                <h1>Liste des revendeurs</h1>
 
                 <button
                     class="--icon"
@@ -42,7 +42,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-
 import Reseller from "~/components/Reseller"
 
 export default {
@@ -52,6 +51,11 @@ export default {
             type: Number,
             default: () => (0)
         }, 
+
+        searchBarData: {
+            type: Object,
+            default: () => ({})
+        },
     },
     data: () => ({
     }),
@@ -67,6 +71,7 @@ export default {
 
         onCloseModal() {
             this.getResellersByDep(null)
+            document.querySelector(".mapboxgl-ctrl-geocoder--input").value = ""
         },
 
         //Animations
@@ -86,6 +91,11 @@ export default {
     watch: {
         localisationDepartment: function () {
             this.getResellersByDep(this.localisationDepartment)
+        },
+        searchBarData: function () {
+            if (this.searchBarData.dp) {
+                this.getResellersByDep(this.searchBarData.dp.substr(0, 2))
+            }
         }
     },
     mounted() {

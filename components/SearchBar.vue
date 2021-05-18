@@ -1,0 +1,91 @@
+<template>
+    <div class="searchbar" />
+</template>
+
+<script>
+export default {
+    name: "Reseller",
+    props: {
+        dep: {
+            type: Number,
+            default: () => (0)
+        }, 
+    },
+    components: {},
+    data: () => ({
+        adresseSearchBar: "",
+        searchBarData: {
+            adressFull: "",
+            adress: "",
+            city: "",
+            dp: 0
+        }
+    }),
+    computed: {},
+    methods: {
+        init () {
+            // Trouver une solution afin de ne pas utiliser un setTimeout
+            setTimeout(() => {
+                document.querySelector(".mapboxgl-ctrl-geocoder--input").addEventListener("focus", () => {
+                    this.addEventOnElements()
+                })
+            }, 100);
+        },
+
+        addEventOnElements: function () {
+            const array = document.getElementsByClassName("mapboxgl-ctrl-geocoder--suggestion")
+            array.forEach(element => {
+                element.addEventListener("click", this.detectAdresseClicked(element))
+            }); 
+        },
+
+        detectAdresseClicked: function (element) {
+            const inputValue = document.querySelector(".mapboxgl-ctrl-geocoder--input").value
+            this.searchBarData =  {
+                adressFull: element.children[0].innerHTML + "," + element.children[1].innerHTML,
+                adress: element.children[0].innerHTML,
+                city: element.children[1].innerHTML,
+            }
+            this.compareAdressAndInputValue(inputValue)
+        },
+        compareAdressAndInputValue(inputValue) {
+            if (inputValue ===  this.searchBarData.adressFull) {
+                inputValue.split(" ").forEach(element => {
+                    if (element.includes(",")) {
+                        element = element.substr(0, element.length - 1)
+                    }
+                    if (this.isNumeric(element) === true && element.length === 5 ) {
+                        this.searchBarData.dp = element
+                        this.$emit("getSearchBarData", this.searchBarData);
+                    }
+                });
+            }
+        },
+
+        isNumeric(str) {
+            if (typeof str != "string") return false 
+            return !isNaN(str) &&
+                !isNaN(parseFloat(str)) 
+        }
+    },
+    watch: {
+        dep: function() {
+            console.log("dep : ", this.dep)
+            document.querySelector(".mapboxgl-ctrl-geocoder--input").value = this.dep
+        },
+    },
+    mounted() {
+        this.init()
+    },
+}
+</script>
+
+<style lang="scss" scoped>
+.searchbar {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0 0.5rem;
+    
+}
+
+</style>
