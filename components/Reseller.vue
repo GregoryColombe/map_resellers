@@ -75,12 +75,12 @@ $background: #f5f8fe;
 $font-color: #43435c;
 $icon-color: #cecfda;
 
+$margin-sm: 0.5rem;
+
 .reseller {
     background-color: white;
-
     margin-bottom: 20px;
-    padding: 15px;
-
+    padding: $margin-sm;
     border-radius: 10px;
 
     &:last-child {margin-bottom: 0}
@@ -92,7 +92,7 @@ $icon-color: #cecfda;
         flex-direction: column;
         align-items: flex-start;
 
-        margin-bottom: 15px;
+        margin-bottom: $margin-sm;
 
         h2, p {
             color: $font-color;
@@ -156,11 +156,8 @@ $icon-color: #cecfda;
     .--separator {
         height: 1px;
         width: 100%;
-
-        margin: 15px 0;
-
+        margin: $margin-sm 0;
         border: none;
-
         background-color: $background;
     }
 }

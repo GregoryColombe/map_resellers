@@ -24,7 +24,7 @@ export default {
     computed: {},
     methods: {
         init () {
-            // Trouver une solution afin de ne pas utiliser un setTimeout
+            // Trouver solution pour eviter utilisation du setTimeout
             setTimeout(() => {
                 document.querySelector(".mapboxgl-ctrl-geocoder--input").addEventListener("focus", () => {
                     this.addEventOnElements()
@@ -46,24 +46,24 @@ export default {
                 adress: element.children[0].innerHTML,
                 city: element.children[1].innerHTML,
             }
-            this.compareAdressAndInputValue(inputValue)
+            if (inputValue ===  this.searchBarData.adressFull) {
+                this.compareAdressAndInputValue(inputValue)
+            }
         },
         compareAdressAndInputValue(inputValue) {
-            if (inputValue ===  this.searchBarData.adressFull) {
-                const wordsArray = inputValue.split(" ")
-                const even = (element) => element === "France"
+            const inputValueSplited = inputValue.split(" ")
+            const even = (element) => element === "France"
 
-                if (wordsArray.some(even)) {
-                    inputValue.split(" ").forEach(element => {
-                        if (element.includes(",")) {
-                            element = element.substr(0, element.length - 1)
-                        }
-                        if (this.isNumeric(element) === true && element.length === 5 ) {
-                            this.searchBarData.dp = element
-                            this.$emit("getSearchBarData", this.searchBarData);
-                        }
-                    });
-                }
+            if (inputValueSplited.some(even)) { 
+                inputValue.split(" ").forEach(element => {
+                    if (element.includes(",")) {
+                        element = element.substr(0, element.length - 1)
+                    }
+                    if (this.isNumeric(element) === true && element.length === 5 ) {
+                        this.searchBarData.dp = element
+                        this.$emit("getSearchBarData", this.searchBarData);
+                    }
+                });
             }
         },
 
@@ -75,8 +75,8 @@ export default {
     },
     watch: {
         dep: function() {
-            // console.log("department selected: ", this.dep)
             document.querySelector(".mapboxgl-ctrl-geocoder--input").value = this.dep
+            // console.log("department: ", this.dep)
         },
     },
     mounted() {
@@ -86,9 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$margin-sm: 0.5rem;
+
 .searchbar {
     border-radius: 0.5rem;
     border: none;
-    padding: 0 0.5rem;
+    padding: 0 $margin-sm;
 }
 </style>

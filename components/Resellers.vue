@@ -113,31 +113,24 @@ $icon-color: #cecfda;
 .resellers {
     width: 30vw;
     height: 100vh;
-
     position: absolute;
     left: 0;
     top: 0;
     transform: translateX(-100%);
-
     display: flex;
     flex-direction: column;
-
     padding: 25px;
     box-sizing: border-box;
-
     background-color: $background;
 
     .--icon {
         display: flex;
         justify-content: center;
         align-items: center;
-
         width: 30px;
         height: 30px;
-
         background-color: white;
         color: $icon-color;
-
     }
 
     button {
@@ -155,7 +148,6 @@ $icon-color: #cecfda;
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         margin-bottom: 20px;
 
         h1 {
@@ -166,13 +158,11 @@ $icon-color: #cecfda;
     &-list {
         height: 100%;
         overflow-y: auto;
-
         border-radius: 10px;
 
         ul {
             padding: 0;
             margin: 0;
-
             list-style: none;
         }
     }

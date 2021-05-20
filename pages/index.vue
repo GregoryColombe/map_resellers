@@ -174,6 +174,9 @@ export default {
 
 <style lang="scss" scoped>
 $background: #f5f8fe;
+$btn-color: rgba(238, 82, 83, 0.95);
+$margin-sm: 0.5rem;
+$margin-md: 1rem;
 
 .container {
     background-color: $background;
@@ -186,7 +189,6 @@ $background: #f5f8fe;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-
         width: 100%;
         height: calc(100% + 1px);
     }
@@ -201,7 +203,7 @@ $background: #f5f8fe;
         &_geocoder {
             border-radius: 0.5rem;
             border: none;
-            padding: 0 0.5rem;
+            padding: 0 $margin-sm;
         }
 
         &_btn {
@@ -210,15 +212,15 @@ $background: #f5f8fe;
 
             button {
                 border: none;
-                background: rgba(238, 82, 83, 0.95);
-                color: #fff;
-                padding: 0.5rem 1rem;
+                background: $btn-color;
+                color: $background;
+                padding: $margin-sm $margin-md;
                 border-radius: 0.5rem;
 
                 &:hover {
                     cursor: pointer;
-                    color: rgba(238, 82, 83, 0.95);
-                    background-color: #fff;
+                    color: $btn-color;
+                    background-color: $background;
                     transition: 0.25s ease-in-out;
                 }
             }
@@ -229,7 +231,8 @@ $background: #f5f8fe;
 @media screen and (max-width: 950px) {
     .container_ui {
         right: initial;
-        width: min-content;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 </style>
