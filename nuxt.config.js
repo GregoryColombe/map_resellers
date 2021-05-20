@@ -15,7 +15,7 @@ export default {
         ]
     },
     publicRuntimeConfig: {
-        baseURL: process.env.BASE_URL || "http://localhost:3000",
+        baseURL: process.env.BASE_URL || "http://localhost:3000" || "https://map-resellers.netlify.app/",
         mapboxToken: process.env.MAPBOX_TOKEN,
         mapboxStyle: process.env.MAPBOX_STYLE
     },

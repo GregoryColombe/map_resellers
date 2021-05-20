@@ -46,10 +46,9 @@ export default {
                 adress: element.children[0].innerHTML,
                 city: element.children[1].innerHTML,
             }
-            if (inputValue ===  this.searchBarData.adressFull) {
-                this.compareAdressAndInputValue(inputValue)
-            }
-        },
+
+            inputValue === this.searchBarData.adressFull && this.compareAdressAndInputValue(inputValue)
+        }, 
         compareAdressAndInputValue(inputValue) {
             const inputValueSplited = inputValue.split(" ")
             const even = (element) => element === "France"
