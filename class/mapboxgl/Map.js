@@ -132,6 +132,7 @@ export default class Map {
 
         onResetDepartments()
     }
+
     getCodeDepartmentSelected() {
         return this.departmentSelected.properties.code
     }

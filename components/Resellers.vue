@@ -81,6 +81,7 @@ export default {
 
             tl.to(resellers, {duration: .5, x: 0})
         },
+
         onLeave(el, done) {
             const { resellers } = this.$refs
             const tl = new this.$TimelineLite({onComplete: () => done()})
@@ -92,6 +93,7 @@ export default {
         localisationDepartment: function () {
             this.getResellersByDep(this.localisationDepartment)
         },
+
         searchBarData: function () {
             if (this.searchBarData.dp) {
                 this.getResellersByDep(this.searchBarData.dp.substr(0, 2))
@@ -173,6 +175,15 @@ $icon-color: #cecfda;
 
             list-style: none;
         }
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .resellers {
+        top: initial;
+        bottom: 0;
+        width: 85vw;
+        height: 80vh;
     }
 }
 </style>

@@ -50,15 +50,20 @@ export default {
         },
         compareAdressAndInputValue(inputValue) {
             if (inputValue ===  this.searchBarData.adressFull) {
-                inputValue.split(" ").forEach(element => {
-                    if (element.includes(",")) {
-                        element = element.substr(0, element.length - 1)
-                    }
-                    if (this.isNumeric(element) === true && element.length === 5 ) {
-                        this.searchBarData.dp = element
-                        this.$emit("getSearchBarData", this.searchBarData);
-                    }
-                });
+                const wordsArray = inputValue.split(" ")
+                const even = (element) => element === "France"
+
+                if (wordsArray.some(even)) {
+                    inputValue.split(" ").forEach(element => {
+                        if (element.includes(",")) {
+                            element = element.substr(0, element.length - 1)
+                        }
+                        if (this.isNumeric(element) === true && element.length === 5 ) {
+                            this.searchBarData.dp = element
+                            this.$emit("getSearchBarData", this.searchBarData);
+                        }
+                    });
+                }
             }
         },
 
@@ -70,7 +75,7 @@ export default {
     },
     watch: {
         dep: function() {
-            console.log("dep : ", this.dep)
+            // console.log("department selected: ", this.dep)
             document.querySelector(".mapboxgl-ctrl-geocoder--input").value = this.dep
         },
     },
@@ -85,7 +90,5 @@ export default {
     border-radius: 0.5rem;
     border: none;
     padding: 0 0.5rem;
-    
 }
-
 </style>

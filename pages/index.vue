@@ -5,7 +5,7 @@
             ref="map"
         />
         <Resellers 
-            :localisation-department="this.localisationDepartment" 
+            :localisation-department="localisationDepartment" 
             :search-bar-data="searchBarData" 
         />
 
@@ -16,7 +16,7 @@
             />
             <div class="container_ui_btn">
                 <button @click="localiseUser">
-                    Localise me
+                    Me localiser
                 </button>
             </div>
         </div>
@@ -125,8 +125,9 @@ export default {
         },
 
         getSearchBarData(value) {
+            this.map.destroyMarkers()
             this.searchBarData = value
-        }
+        },
     },
     watch: {
         resellers: {
@@ -195,7 +196,7 @@ $background: #f5f8fe;
         top: 2.5rem;
         right: 2.5rem;
         display: flex;
-        height: 2rem;
+        align-items: center;
 
         &_geocoder {
             border-radius: 0.5rem;
@@ -223,6 +224,12 @@ $background: #f5f8fe;
             }
         }
     }
+}
 
+@media screen and (max-width: 950px) {
+    .container_ui {
+        right: initial;
+        width: min-content;
+    }
 }
 </style>
