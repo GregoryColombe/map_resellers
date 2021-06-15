@@ -111,7 +111,7 @@ export default {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(() => {
                     const tl = new this.$TimelineLite()
-                    tl.to(".container_ui_btn", {display:"block", opacity: 1})
+                    tl.to(".container_ui_btn", { duration: .5, css: { alpha: 1} })
                 })
             }
         },
@@ -208,7 +208,6 @@ $margin-md: 1rem;
 
         &_btn {
             opacity: 0;
-            display: none;
 
             button {
                 border: none;
