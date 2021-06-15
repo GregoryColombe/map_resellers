@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 export default {
     target: "static",
     head: {
@@ -14,7 +16,7 @@ export default {
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
         ]
     },
-    publicRuntimeConfig: {
+    env: {
         baseURL: process.env.BASE_URL || "http://localhost:3000",
         mapboxToken: process.env.MAPBOX_TOKEN,
         mapboxStyle: process.env.MAPBOX_STYLE
