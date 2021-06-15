@@ -145,8 +145,8 @@ export default {
     },
     mounted() {
         this.map = new Map({
-            token: this.$config.mapboxToken,
-            style: this.$config.mapboxStyle,
+            token: process.env.MAPBOX_TOKEN,
+            style: process.env.MAPBOX_STYLE,
             center: [2.3334804999999506, 46.8770224],
             zoom: 5,
             minZoom: 5
