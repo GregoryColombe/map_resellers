@@ -1,6 +1,5 @@
-{
-    
-    "1": {
+[
+    {
         "id_partenaire": 393,
         "id_user": 100200,
         "societe_user": " IDAO Grenoble",
@@ -31,8 +30,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "2": {
+    {
         "id_partenaire": 348,
         "id_user": 100203,
         "societe_user": " IDAO LYON",
@@ -62,8 +60,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "3": {
+    {
         "id_partenaire": 329,
         "id_user": 100217,
         "societe_user": " iLoos Mulhouse",
@@ -93,8 +90,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "4": {
+    {
         "id_partenaire": 432,
         "id_user": 100182,
         "societe_user": " NPN Services",
@@ -124,8 +120,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "5": {
+    {
         "id_partenaire": 549,
         "id_user": 0,
         "societe_user": "2aBIM",
@@ -155,8 +150,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "6": {
+    {
         "id_partenaire": 110,
         "id_user": 100153,
         "societe_user": "2aBIM",
@@ -186,8 +180,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "7": {
+    {
         "id_partenaire": 544,
         "id_user": 100103947,
         "societe_user": "ACTIMAC",
@@ -217,8 +210,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "8": {
+    {
         "id_partenaire": 152,
         "id_user": 100117,
         "societe_user": "ALPHIMAGE",
@@ -248,8 +240,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "9": {
+    {
         "id_partenaire": 161,
         "id_user": 133947027,
         "societe_user": "ARCHICAST - Groupe BIMP",
@@ -279,8 +270,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "10": {
+    {
         "id_partenaire": 163,
         "id_user": 133907017,
         "societe_user": "ARCHIMATIQUE",
@@ -310,8 +300,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "11": {
+    {
         "id_partenaire": 188,
         "id_user": 100209,
         "societe_user": "ATILA-diffusion",
@@ -341,8 +330,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "12": {
+    {
         "id_partenaire": 204,
         "id_user": 100123,
         "societe_user": "BIGORRE BUREAU",
@@ -372,8 +360,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "13": {
+    {
         "id_partenaire": 205,
         "id_user": 100210,
         "societe_user": "BIMP Lyon",
@@ -403,8 +390,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "14": {
+    {
         "id_partenaire": 221,
         "id_user": 100100387,
         "societe_user": "CAD CONCEPT",
@@ -434,8 +420,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "15": {
+    {
         "id_partenaire": 688,
         "id_user": 0,
         "societe_user": "CAD Equipement Nord",
@@ -465,8 +450,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "16": {
+    {
         "id_partenaire": 223,
         "id_user": 133914364,
         "societe_user": "CAD Equipement Ouest",
@@ -496,8 +480,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "17": {
+    {
         "id_partenaire": 684,
         "id_user": 0,
         "societe_user": "CAD(AT)Work",
@@ -527,8 +510,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "18": {
+    {
         "id_partenaire": 702,
         "id_user": 0,
         "societe_user": "CAD(AT)work_Archiswitch",
@@ -558,8 +540,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "19": {
+    {
         "id_partenaire": 233,
         "id_user": 100214,
         "societe_user": "CAPINFO",
@@ -589,8 +570,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "20": {
+    {
         "id_partenaire": 799,
         "id_user": 0,
         "societe_user": "CED - CAPINFO",
@@ -620,8 +600,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "21": {
+    {
         "id_partenaire": 287,
         "id_user": 100138,
         "societe_user": "Easy Company",
@@ -651,8 +630,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "22": {
+    {
         "id_partenaire": 288,
         "id_user": 100147491,
         "societe_user": "Easy Computer Metz",
@@ -682,8 +660,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-
-    "23" : {
+    {
         "id_partenaire": 289,
         "id_user": 133838440,
         "societe_user": "EASY COMPUTER NANCY",
@@ -713,8 +690,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "24": {
+    {
         "id_partenaire": 304,
         "id_user": 100207024,
         "societe_user": "EUROSTUDIO",
@@ -744,8 +720,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "25": {
+    {
         "id_partenaire": 350,
         "id_user": 6151,
         "societe_user": "IFI INFORMATIQUE",
@@ -775,8 +750,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "26": {
+    {
         "id_partenaire": 906,
         "id_user": 0,
         "societe_user": "IM +",
@@ -806,8 +780,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "27": {
+    {
         "id_partenaire": 546,
         "id_user": 133974619,
         "societe_user": "INFOGRAPHIX",
@@ -837,8 +810,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "28": {
+    {
         "id_partenaire": 368,
         "id_user": 100205346,
         "societe_user": "IP Store Entreprise Angoul\u00eame",
@@ -868,8 +840,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "29": {
+    {
         "id_partenaire": 369,
         "id_user": 100203849,
         "societe_user": "IP Store Entreprise La Rochelle",
@@ -899,8 +870,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "30": {
+    {
         "id_partenaire": 402,
         "id_user": 100104070,
         "societe_user": "MACSI",
@@ -930,8 +900,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "31": {
+    {
         "id_partenaire": 404,
         "id_user": 133843884,
         "societe_user": "MAISON PARINET",
@@ -961,12 +930,11 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "32": {
+    {
         "id_partenaire": 519,
         "id_user": 133943996,
         "societe_user": "TECHNICAD",
-        "adresse1_user": "39 rue des Granges Galand\\\\r\\\\nBP 60414",
+        "adresse1_user": "39 rue des Granges Galand",
         "adresse2_user": "",
         "cp_user": "37554",
         "ville_user": "Saint Avertin Cedex",
@@ -992,8 +960,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "33": {
+    {
         "id_partenaire": 147,
         "id_user": 100103952,
         "societe_user": "TGS France (Adventi Informatique)",
@@ -1023,8 +990,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "34": {
+    {
         "id_partenaire": 222,
         "id_user": 100126,
         "societe_user": "CAD Equipement",
@@ -1054,8 +1020,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "35": {
+    {
         "id_partenaire": 326,
         "id_user": 133857920,
         "societe_user": "HORDE INFOGRAPHIE",
@@ -1085,8 +1050,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "36": {
+    {
         "id_partenaire": 388,
         "id_user": 100103941,
         "societe_user": "LINEIS - Groupe Graitec",
@@ -1116,8 +1080,7 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     },
-    
-    "37": {
+    {
         "id_partenaire": 143,
         "id_user": 100104159,
         "societe_user": "AIGA - Groupe Prodware",
@@ -1147,4 +1110,4 @@
         "id_epb": 0,
         "leads_suivi_fm_actifs": 0
     }
-}
+]

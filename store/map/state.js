@@ -1,4 +1,3 @@
 export default () => ({
-  data: {},
-  modal: false
+    resellers: null,
 })

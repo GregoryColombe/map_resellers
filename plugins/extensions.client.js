@@ -1,5 +1,5 @@
-import Vue from 'vue'
+import Vue from "vue"
+import { TweenMax, Power4 } from "gsap"
 
-import * as turf from '@turf/turf'
-
-Vue.prototype.$turf = turf;
+Vue.prototype.$TweenMax     = TweenMax
+Vue.prototype.$Ease         = Power4
