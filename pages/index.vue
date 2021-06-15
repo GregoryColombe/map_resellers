@@ -4,14 +4,14 @@
             id="map"
             ref="map"
         />
-        <Resellers 
-            :localisation-department="localisationDepartment" 
-            :search-bar-data="searchBarData" 
+        <Resellers
+            :localisation-department="localisationDepartment"
+            :search-bar-data="searchBarData"
         />
 
         <div class="container_ui">
-            <SearchBar 
-                :dep="this.dep" 
+            <SearchBar
+                :dep="this.dep"
                 @getSearchBarData="getSearchBarData"
             />
             <div class="container_ui_btn">
@@ -52,7 +52,7 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            resellers: "map/getResellers" 
+            resellers: "map/getResellers"
         })
     },
     methods: {
@@ -84,15 +84,23 @@ export default {
 
         onEnter() {
             const { map } = this.$refs
-            const tl      = new this.$TimelineLite()
 
-            tl.to(map, {duration: .5, width: "calc(100% - 50px)", height: "calc(100% - 50px)"})
+            console.log(map)
+
+            this.$TweenMax.to(map, {
+                duration: .5,
+                width: "calc(100% - 50px)",
+                height: "calc(100% - 50px)"
+            })
         },
         onLeave() {
             const { map } = this.$refs
-            const tl      = new this.$TimelineLite({delay: .5})
 
-            tl.to(map, {duration: .5, width: "100%", height: "calc(100% + 1px)"})
+            this.$TweenMax.to(map, {
+                duration: .5,
+                width: "100%",
+                height: "calc(100% + 1px)"
+            })
         },
 
         localiseUser() {
@@ -110,8 +118,10 @@ export default {
         activeGeoLoc() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(() => {
-                    const tl = new this.$TimelineLite()
-                    tl.to(".container_ui_btn", { duration: .5, css: { alpha: 1} })
+                    this.$TweenMax.to(".container_ui_btn", {
+                        duration: .5,
+                        opacity: 1
+                    })
                 })
             }
         },
@@ -119,7 +129,7 @@ export default {
         getCodeUserPosition(long, lat) {
             getAddressByCoordinates(long, lat)
                 .then(resp => {
-                    this.localisationDepartment = parseInt(resp.data.features[0].properties.citycode.substr(0, 2)) 
+                    this.localisationDepartment = parseInt(resp.data.features[0].properties.citycode.substr(0, 2))
                     this.dep = this.localisationDepartment
                 })
         },
@@ -134,10 +144,10 @@ export default {
             handler(value) {
                 if(value) {
                     this.setResellersMarkers(value)
-                    this.$nextTick(() => this.onEnter )
+                    this.$nextTick(() => this.onEnter() )
                 } else {
                     this.map.resetSelectedDepartment()
-                    this.$nextTick(() => this.onLeave )
+                    this.$nextTick(() => this.onLeave() )
                 }
             },
             deep: true
@@ -164,7 +174,7 @@ export default {
             }
         )
 
-        this.activeGeoLoc()        
+        this.activeGeoLoc()
     },
     destroyed() {
         this.map.destroy()

@@ -50,7 +50,7 @@ export default {
         localisationDepartment: {
             type: Number,
             default: () => (0)
-        }, 
+        },
 
         searchBarData: {
             type: Object,
@@ -77,16 +77,23 @@ export default {
         //Animations
         onEnter() {
             const { resellers } = this.$refs
-            const tl = new this.$TimelineLite({delay: .5})
 
-            tl.to(resellers, {duration: .5, x: 0})
+            this.$TweenMax.to(resellers, {
+                duration: .5,
+                delay: .5,
+                x: 0
+            })
         },
 
         onLeave(el, done) {
             const { resellers } = this.$refs
-            const tl = new this.$TimelineLite({onComplete: () => done()})
 
-            tl.to(resellers, {duration: .5, x: "-100%"})
+            this.$TweenMax.to(resellers, {
+                duration: .5,
+                delay: .5,
+                x: "-100%",
+                onComplete:() => done()
+            })
         }
     },
     watch: {
