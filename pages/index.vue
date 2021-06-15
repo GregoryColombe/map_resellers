@@ -134,10 +134,10 @@ export default {
             handler(value) {
                 if(value) {
                     this.setResellersMarkers(value)
-                    this.onEnter()
+                    this.$nextTick(() => this.onEnter )
                 } else {
                     this.map.resetSelectedDepartment()
-                    this.onLeave()
+                    this.$nextTick(() => this.onLeave )
                 }
             },
             deep: true
