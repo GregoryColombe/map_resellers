@@ -75,7 +75,6 @@ export default {
     watch: {
         dep: function() {
             document.querySelector(".mapboxgl-ctrl-geocoder--input").value = this.dep
-            // console.log("department: ", this.dep)
         },
     },
     mounted() {

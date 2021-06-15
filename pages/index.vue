@@ -85,8 +85,6 @@ export default {
         onEnter() {
             const { map } = this.$refs
 
-            console.log(map)
-
             this.$TweenMax.to(map, {
                 duration: .5,
                 width: "calc(100% - 50px)",
