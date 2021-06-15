@@ -37,7 +37,7 @@
 
             <div v-if="data.siteweb_user">
                 <a
-                    :href="data.siteweb_user"
+                    :href="`https://${data.siteweb_user}`"
                     target="_blank"
                 >
                     <fa-icon icon="globe" />
@@ -66,7 +66,9 @@ export default {
     computed: {},
     methods: {},
     watch: {},
-    mounted() {}
+    mounted() {
+        console.log(this.data)
+    }
 }
 </script>
 
