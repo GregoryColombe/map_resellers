@@ -17,9 +17,9 @@ export default {
         ]
     },
     env: {
-        baseURL: process.env.BASE_URL || "http://localhost:3000",
-        mapboxToken: process.env.MAPBOX_TOKEN,
-        mapboxStyle: process.env.MAPBOX_STYLE
+        BASE_URL: process.env.BASE_URL || "http://localhost:3000",
+        MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
+        MAPBOX_STYLE: process.env.MAPBOX_STYLE
     },
     privateRuntimeConfig: {},
     css: [
@@ -31,7 +31,8 @@ export default {
     components: false,
     buildModules: [
         "@nuxtjs/eslint-module",
-        "@nuxtjs/fontawesome"
+        "@nuxtjs/fontawesome",
+        "@nuxtjs/dotenv"
     ],
     modules: [
         "@nuxtjs/axios",
