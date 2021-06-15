@@ -52,7 +52,7 @@ export default {
     }),
     computed: {
         ...mapGetters({
-            resellers: "map/getResellers"
+            resellers: "map/getResellers" 
         })
     },
     methods: {
