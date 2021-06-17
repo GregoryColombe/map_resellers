@@ -152,6 +152,8 @@ export default {
         },
     },
     mounted() {
+        console.log("process token : ", process.env.MAPBOX_TOKEN);
+
         this.map = new Map({
             token: process.env.MAPBOX_TOKEN,
             style: process.env.MAPBOX_STYLE,

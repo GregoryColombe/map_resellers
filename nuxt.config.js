@@ -2,6 +2,7 @@ require("dotenv").config()
 
 export default {
     target: "static",
+    ssr: false,
     head: {
         title: "Abvent | Carte Revendeurs",
         htmlAttrs: {
@@ -17,7 +18,7 @@ export default {
         ]
     },
     env: {
-        BASE_URL: process.env.BASE_URL || "http://localhost:3000",
+        BASE_URL: process.env.BASE_URL || "",
         MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
         MAPBOX_STYLE: process.env.MAPBOX_STYLE
     },
