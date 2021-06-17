@@ -2,7 +2,7 @@ require("dotenv").config()
 
 export default {
     target: "static",
-    ssr: false,
+    ssr: false, 
     head: {
         title: "Abvent | Carte Revendeurs",
         htmlAttrs: {
