@@ -66,9 +66,7 @@ export default {
     computed: {},
     methods: {},
     watch: {},
-    mounted() {
-        console.log(this.data)
-    }
+    mounted() {}
 }
 </script>
 

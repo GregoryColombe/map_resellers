@@ -152,8 +152,6 @@ export default {
         },
     },
     mounted() {
-        console.log("process token : ", process.env.MAPBOX_TOKEN);
-
         this.map = new Map({
             token: process.env.MAPBOX_TOKEN,
             style: process.env.MAPBOX_STYLE,
@@ -205,7 +203,7 @@ $margin-md: 1rem;
 
     &_ui {
         position: absolute;
-        top: 2.5rem;
+        top: 1rem;
         right: 2.5rem;
         display: flex;
         align-items: center;
