@@ -240,8 +240,9 @@ $margin-md: 1rem;
 @media screen and (max-width: 950px) {
     .container_ui {
         right: initial;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 }
 </style>
