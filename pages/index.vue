@@ -243,6 +243,10 @@ $margin-md: 1rem;
         width: 100%;
         display: flex;
         justify-content: center;
+
+        &_btn {
+            margin-right: 0.5rem;
+        }
     }
 }
 </style>
