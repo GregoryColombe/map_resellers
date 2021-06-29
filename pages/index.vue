@@ -118,6 +118,7 @@ export default {
                 navigator.geolocation.getCurrentPosition(() => {
                     this.$TweenMax.to(".container_ui_btn", {
                         duration: .5,
+                        display: "block",
                         opacity: 1
                     })
                 })
@@ -215,6 +216,7 @@ $margin-md: 1rem;
         }
 
         &_btn {
+            display: none;
             opacity: 0;
 
             button {
