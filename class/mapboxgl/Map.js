@@ -30,7 +30,7 @@ export default class Map {
         
         //Search bar
         let geocoder = new MapboxGeocoder({ 
-            accessToken: token, // Set the access token
+            accessToken: "pk.eyJ1IjoiZ3JlZ29yeWNvbG9tYmUiLCJhIjoiY2sxdWY0bXJyMDV2bDNjcW1rdnI5azM4byJ9.6csVhKC7yWAmHFl6OmFBCw", // Set the access token
             mapboxgl: mapboxgl, // Set the mapbox-gl instance
             language: "fr-FR",
             marker: false,

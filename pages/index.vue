@@ -203,7 +203,7 @@ $margin-md: 1rem;
 
     &_ui {
         position: absolute;
-        top: 1rem;
+        top: 2rem;
         right: 2.5rem;
         display: flex;
         align-items: center;
@@ -241,6 +241,7 @@ $margin-md: 1rem;
         width: 100%;
         display: flex;
         justify-content: center;
+        top: 1rem;
 
         &_btn {
             margin-right: 0.5rem;
