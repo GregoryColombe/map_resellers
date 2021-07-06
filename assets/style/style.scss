@@ -4,3 +4,8 @@ html, body {
     overflow: hidden;
 }
 
+@media screen and (max-width: 600px) {
+    .mapboxgl-ctrl-geocoder {
+        min-width: 150px !important;
+    }
+}
