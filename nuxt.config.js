@@ -53,7 +53,6 @@ export default {
         publicPath: process.env.BASE_URL,
     },
     router: {
-        base: "/",
         mode: "hash"
     }
 }
