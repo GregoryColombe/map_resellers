@@ -49,5 +49,11 @@ export default {
     axios: {
         baseURL: process.env.BASE_URL
     },
-    build: {}
+    build: {
+        publicPath: process.env.BASE_URL,
+    },
+    router: {
+        base: "/",
+        mode: "hash"
+    }
 }

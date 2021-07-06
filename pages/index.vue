@@ -76,6 +76,8 @@ export default {
                             .then(resp => {
                                 const coordinates = resp.data.features[0].geometry.coordinates
                                 this.map.addMarker(coordinates,this.colors[key])
+                            }).catch((error) => {
+                                console.error(error)
                             })
                     })
                 }
