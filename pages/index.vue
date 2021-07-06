@@ -226,7 +226,7 @@ $margin-md: 1rem;
                 background: $btn-color;
                 color: $background;
                 padding: $margin-sm $margin-md;
-                border-radius: 0.5rem;
+                border-radius: 4px;
 
                 &:hover {
                     cursor: pointer;

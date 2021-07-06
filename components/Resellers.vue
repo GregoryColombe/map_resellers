@@ -161,6 +161,10 @@ $icon-color: #cecfda;
             font-size: 22px;
             color: $font-color;
         }
+
+        .--icon {
+            color: $font-color;
+        }
     }
     &-list {
         height: 100%;
